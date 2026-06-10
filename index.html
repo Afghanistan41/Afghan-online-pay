@@ -3,367 +3,276 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>Afg Online Pay</title>
+<title>پنل مدیریت | Afg Online Pay</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,sans-serif;}
-body{background:#1877f2;overflow-x:hidden;}
-.page{display:none;min-height:100vh;background:#1877f2;animation:fadePage .35s ease;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,system-ui;}
+body{background:#0f172a;min-height:100vh;}
+.page{display:none;min-height:100vh;animation:fadeIn 0.4s ease;}
 .page.active{display:block;}
-@keyframes fadePage{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-.container{width:100%;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:#1877f2;}
-.card{width:100%;max-width:450px;background:transparent;padding:20px;}
-.logo-circle{width:120px;height:120px;margin:0 auto 15px;border-radius:50%;overflow:hidden;border:4px solid #fff;}
-.logo-circle img{width:100%;height:100%;object-fit:cover;}
-.logo-title{text-align:center;font-size:26px;font-weight:bold;color:#fff;}
-.sub-title{text-align:center;color:#eaeaea;margin-bottom:20px;}
-.input-group{position:relative;margin-bottom:12px;}
-input,select{width:100%;padding:14px;border:none;border-radius:12px;outline:none;font-size:15px;margin-bottom:10px;background:#fff;}
-.eye-btn{position:absolute;left:12px;top:50%;transform:translateY(-50%);cursor:pointer;background:transparent;font-size:18px;}
-.btn{width:100%;padding:14px;border:none;border-radius:12px;background:#0d6efd;color:#fff;font-weight:bold;margin-top:10px;cursor:pointer;transition:.25s;}
-.btn:hover{transform:translateY(-2px);}
-.btn:active{transform:scale(.98);}
-.secondary{background:#0b5ed7;}
-.message{position:fixed;top:20px;left:50%;transform:translateX(-50%);padding:12px 20px;border-radius:10px;color:#fff;display:none;z-index:9999;animation:slideDown .35s ease;font-size:14px;z-index:10001;}
-@keyframes slideDown{from{opacity:0;transform:translate(-50%,-25px);}to{opacity:1;transform:translate(-50%,0);}}
-.success{background:#28a745;}
-.error{background:#dc3545;}
-.warning-msg{background:#f59e0b;}
-.dashboard{background:#f0f2f5;min-height:100vh;padding-bottom:30px;}
-.topbar{height:60px;background:#1877f2;display:flex;justify-content:space-between;align-items:center;padding:0 15px;color:#fff;}
-.left{display:flex;align-items:center;gap:10px;}
-.menu-btn{background:none;border:none;color:#fff;font-size:26px;cursor:pointer;}
-.user-box{display:flex;align-items:center;gap:8px;}
-#dashFlag{width:22px;height:15px;border-radius:3px;}
-.balance{margin:20px;background:#fff;padding:20px;border-radius:15px;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,0.05);}
-.balance h2{color:#1877f2;}
-.quick-actions{margin:20px;}
-.quick-title{font-size:16px;font-weight:bold;color:#1e293b;margin-bottom:15px;padding-right:5px;border-right:4px solid #1877f2;}
-.actions-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
-.action-card{background:#fff;border-radius:16px;padding:14px 8px;text-align:center;cursor:pointer;transition:all 0.25s ease;box-shadow:0 2px 8px rgba(0,0,0,0.05);}
-.action-card:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,0.1);background:#f8fafc;}
-.action-icon{font-size:28px;margin-bottom:8px;display:block;}
-.action-name{font-size:12px;color:#334155;font-weight:500;}
-.sidebar{position:fixed;top:0;right:-280px;width:280px;height:100%;background:#fff;transition:.3s;padding:15px;z-index:999;box-shadow:-2px 0 20px rgba(0,0,0,0.1);}
-.sidebar.active{right:0;}
-.sidebar-header{display:flex;justify-content:space-between;align-items:center;font-weight:bold;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid #e2e8f0;}
-.sidebar-header button{background:none;border:none;font-size:20px;cursor:pointer;}
-.sidebar a{display:block;padding:12px;margin:5px 0;background:#f5f5f5;border-radius:8px;text-decoration:none;color:#333;cursor:pointer;transition:0.2s;}
-.sidebar a:hover{background:#1877f2;color:#fff;}
-.social-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;margin:20px 0;}
-.social-item{background:linear-gradient(135deg,#fff,#f8fafc);border-radius:20px;padding:20px;text-align:center;cursor:pointer;transition:all 0.3s ease;box-shadow:0 4px 12px rgba(0,0,0,0.08);}
-.social-item:hover{transform:translateY(-5px);}
-.social-icon{font-size:48px;margin-bottom:10px;display:block;}
-.social-name{font-size:16px;font-weight:bold;color:#1e293b;}
-.social-price{font-size:12px;color:#64748b;}
-.network-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:15px 0;}
-.network-btn{background:#f1f5f9;border:none;padding:12px;border-radius:12px;font-size:14px;font-weight:bold;cursor:pointer;transition:0.2s;}
-.network-btn:hover{background:#1877f2;color:#fff;}
-.package-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:15px 0;}
-.package-btn{background:linear-gradient(135deg,#e0f2fe,#bae6fd);border:none;padding:12px;border-radius:12px;font-size:14px;font-weight:bold;cursor:pointer;transition:0.2s;display:flex;justify-content:space-between;align-items:center;}
-.package-btn:hover{background:#38bdf8;color:#fff;}
-.settings-card{animation:fadePage .4s ease;}
-.support-buttons{display:flex;flex-direction:column;gap:15px;margin-top:30px;}
-.support-btn{background:#25d366;color:#fff;text-align:center;font-weight:bold;}
-.support-btn:hover{background:#128C7E;}
-.wallet-container{min-height:100vh;background:radial-gradient(circle at 30% 10%, #0a0c15, #020308);display:flex;flex-direction:column;justify-content:center;align-items:center;padding:15px;}
-.card-3d{perspective:1000px;margin-bottom:20px;width:100%;max-width:360px;}
-.flip-card-inner{width:100%;aspect-ratio:85/54;position:relative;transition:transform 0.6s cubic-bezier(0.23,1,0.32,1);transform-style:preserve-3d;cursor:pointer;border-radius:20px;}
-.flip-card-inner.flipped{transform:rotateY(180deg);}
-.card-front-side,.card-back-side{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:20px;padding:16px;}
-.card-front-side{background:linear-gradient(135deg,#1e3a5f,#0f172a,#1e1b4b);background-size:200% 200%;animation:gradientShift 4s ease infinite;transform:rotateY(0deg);}
-@keyframes gradientShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
-.card-back-side{background:linear-gradient(135deg,#0f172a,#1a1a2e);transform:rotateY(180deg);}
-.card-front-side::before{content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);animation:shineMove 4s infinite;pointer-events:none;}
-@keyframes shineMove{0%{left:-100%;}20%{left:100%;}100%{left:100%;}}
-.card-front-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
-.bank-name{font-size:18px;font-weight:800;background:linear-gradient(135deg,#ffffff,#a5f3fc);-webkit-background-clip:text;background-clip:text;color:transparent;}
-.visa-symbol{font-size:32px;animation:visaFloat 2s ease-in-out infinite;}
-@keyframes visaFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-3px);}}
-.sim-card-chip{width:40px;height:32px;background:linear-gradient(145deg,#fbbf24,#d97706);border-radius:8px;margin-bottom:12px;}
-.card-number-display{font-size:16px;letter-spacing:2px;font-family:monospace;margin:8px 0;color:#fff;background:rgba(255,255,255,0.1);padding:8px;border-radius:10px;text-align:center;}
-.card-info-row{display:flex;justify-content:space-between;margin:8px 0;}
-.info-label{font-size:8px;opacity:0.7;color:#cbd5e1;}
-.info-value{font-size:12px;font-weight:bold;color:#fff;}
-.balance-on-card{margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.2);}
-.balance-title{font-size:9px;opacity:0.7;color:#cbd5e1;}
-.balance-number{font-size:22px;font-weight:800;background:linear-gradient(135deg,#fde047,#f59e0b);-webkit-background-clip:text;background-clip:text;color:transparent;}
-.card-back-side .back-header-text{text-align:center;margin-bottom:10px;color:#94a3b8;font-size:10px;}
-.black-magnetic{background:#000;height:32px;width:100%;margin:10px 0;border-radius:3px;}
-.cvv-white-box{background:#fff;padding:5px 10px;width:65%;border-radius:6px;margin:10px 0;display:flex;justify-content:space-between;}
-.cvv-label-text{color:#1e293b;font-size:10px;font-weight:bold;}
-.cvv-number{color:#000;font-family:monospace;font-size:12px;}
-.password-secure-box{background:linear-gradient(135deg,rgba(255,215,0,0.15),rgba(255,215,0,0.05));border:1px solid #fbbf24;border-radius:12px;padding:10px;margin-top:10px;text-align:center;}
-.password-label-text{font-size:10px;color:#fcd34d;}
-.password-real-value{font-size:16px;font-weight:bold;color:#fbbf24;letter-spacing:2px;font-family:monospace;background:rgba(0,0,0,0.4);display:inline-block;padding:4px 12px;border-radius:20px;}
-.back-footer-note{margin-top:10px;font-size:7px;text-align:center;opacity:0.4;}
-.flip-card-inner{animation:cardPop 0.5s ease-out;}
-@keyframes cardPop{0%{opacity:0;transform:scale(0.9) translateY(30px);}100%{opacity:1;transform:scale(1) translateY(0);}}
-.transactions-container{min-height:100vh;background:#f0f2f5;padding:20px;}
-.transactions-header{text-align:center;padding:20px;background:#1877f2;margin:-20px -20px 20px -20px;color:#fff;border-radius:0 0 25px 25px;}
-.transactions-list{display:flex;flex-direction:column;gap:12px;padding-bottom:80px;}
-.transaction-card{background:#fff;border-radius:20px;padding:16px;box-shadow:0 4px 15px rgba(0,0,0,0.08);animation:slideUp 0.4s ease backwards;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(15px);}to{opacity:1;transform:translateY(0);}}
+.login-container{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px;background:linear-gradient(135deg,#0f172a,#1e293b);}
+.login-card{background:rgba(255,255,255,0.08);backdrop-filter:blur(12px);border-radius:32px;padding:35px;width:100%;max-width:380px;border:1px solid rgba(255,255,255,0.15);animation:slideUp 0.5s ease;}
 @keyframes slideUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
-.transaction-icon{width:45px;height:45px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;background:#fef3c7;}
-.transaction-row{display:flex;gap:12px;}
-.transaction-details{flex:1;}
-.transaction-title{font-size:15px;font-weight:bold;color:#1e293b;}
-.transaction-time{font-size:11px;color:#94a3b8;margin-top:4px;display:flex;flex-wrap:wrap;gap:6px;}
-.transaction-amount{font-weight:bold;font-size:17px;color:#dc2626;}
-.transaction-status{display:inline-block;padding:2px 8px;border-radius:20px;font-size:10px;margin-top:6px;}
+.login-card h2{color:#fff;text-align:center;margin-bottom:8px;font-size:28px;display:flex;align-items:center;justify-content:center;gap:10px;}
+.login-card p{color:#94a3b8;text-align:center;margin-bottom:30px;}
+.login-card input{width:100%;padding:14px;border:none;border-radius:16px;margin-bottom:14px;font-size:15px;background:#f1f5f9;outline:none;transition:0.2s;}
+.login-card input:focus{box-shadow:0 0 0 3px rgba(59,130,246,0.3);}
+.login-card button{width:100%;padding:14px;border:none;border-radius:16px;background:#3b82f6;color:#fff;font-weight:bold;font-size:16px;cursor:pointer;transition:0.2s;}
+.login-card button:hover{transform:translateY(-2px);background:#2563eb;}
+.message{position:fixed;top:20px;left:50%;transform:translateX(-50%);padding:12px 24px;border-radius:50px;color:#fff;display:none;z-index:9999;animation:msgSlide 0.3s ease;font-size:14px;box-shadow:0 4px 15px rgba(0,0,0,0.2);}
+@keyframes msgSlide{from{opacity:0;transform:translate(-50%,-25px);}to{opacity:1;transform:translate(-50%,0);}}
+.admin-header{background:#fff;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;box-shadow:0 2px 15px rgba(0,0,0,0.08);}
+.admin-header h2{font-size:18px;color:#1877f2;display:flex;align-items:center;gap:8px;}
+.admin-header button{background:#ef4444;border:none;padding:8px 18px;border-radius:30px;color:#fff;cursor:pointer;transition:0.2s;}
+.admin-header button:hover{transform:scale(1.02);background:#dc2626;}
+.admin-tabs{display:flex;gap:8px;background:#fff;padding:12px 15px;overflow-x:auto;border-bottom:1px solid #e2e8f0;flex-wrap:wrap;}
+.tab-btn{background:transparent;border:none;padding:10px 20px;color:#64748b;cursor:pointer;border-radius:30px;transition:0.2s;font-size:14px;display:flex;align-items:center;gap:8px;}
+.tab-btn:hover{background:#f1f5f9;}
+.tab-btn.active{background:#1877f2;color:#fff;box-shadow:0 4px 10px rgba(24,119,242,0.3);}
+.tab-content{display:none;padding:20px;background:#f0f2f5;min-height:calc(100vh - 115px);}
+.tab-content.active{display:block;animation:contentFade 0.4s ease;}
+@keyframes contentFade{from{opacity:0;}to{opacity:1;}}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:18px;margin-bottom:25px;}
+.stat-card{background:linear-gradient(135deg,#1877f2,#0e5bc2);color:#fff;border-radius:28px;padding:22px;text-align:center;box-shadow:0 8px 20px rgba(0,0,0,0.12);transition:0.3s;animation:statPop 0.5s ease backwards;}
+.stat-card:hover{transform:translateY(-5px);}
+@keyframes statPop{from{opacity:0;transform:scale(0.9);}to{opacity:1;transform:scale(1);}}
+.stat-card h3{font-size:32px;margin-bottom:8px;font-weight:800;}
+.stat-card p{font-size:13px;opacity:0.9;}
+.section-card{background:#fff;border-radius:28px;padding:22px;margin-bottom:22px;box-shadow:0 4px 15px rgba(0,0,0,0.05);transition:0.2s;}
+.section-title{font-size:18px;font-weight:bold;color:#1e293b;margin-bottom:20px;border-right:4px solid #1877f2;padding-right:14px;display:flex;align-items:center;gap:8px;}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+@media (max-width:600px){.price-grid{grid-template-columns:repeat(2,1fr);}}
+.price-item{background:#f8fafc;border-radius:20px;padding:16px;border:1px solid #e2e8f0;transition:0.2s;}
+.price-item:hover{transform:translateY(-3px);box-shadow:0 6px 14px rgba(0,0,0,0.08);}
+.price-item label{display:block;font-size:12px;color:#64748b;margin-bottom:8px;font-weight:500;}
+.price-item input{width:100%;padding:12px;border:1px solid #e2e8f0;border-radius:14px;font-size:14px;transition:0.2s;}
+.price-item input:focus{outline:none;border-color:#1877f2;box-shadow:0 0 0 3px rgba(24,119,242,0.1);}
+.package-network{background:#f8fafc;border-radius:24px;padding:18px;margin-bottom:18px;transition:0.2s;border:1px solid #e2e8f0;}
+.package-network h4{color:#1e293b;margin-bottom:14px;font-size:16px;display:flex;align-items:center;gap:8px;}
+.package-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+@media (max-width:600px){.package-row{grid-template-columns:repeat(2,1fr);}}
+.package-row .price-item{padding:12px;}
+.btn{background:#1877f2;color:#fff;border:none;padding:14px 24px;border-radius:40px;cursor:pointer;font-weight:bold;transition:0.2s;margin-top:10px;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(24,119,242,0.3);}
+.btn-success{background:#10b981;}
+.btn-success:hover{background:#059669;}
+.btn-danger{background:#ef4444;}
+.btn-danger:hover{background:#dc2626;}
+.btn-warning{background:#f59e0b;}
+.transaction-item{background:#fff;border-radius:24px;padding:18px;margin-bottom:14px;border:1px solid #e2e8f0;transition:0.3s;animation:txSlide 0.4s ease backwards;}
+.transaction-item:hover{transform:translateX(-5px);box-shadow:0 10px 25px rgba(0,0,0,0.1);}
+.transaction-item.pending{border-right:5px solid #f59e0b;background:linear-gradient(to right,#fff,#fffbeb);}
+@keyframes txSlide{from{opacity:0;transform:translateX(30px);}to{opacity:1;transform:translateX(0);}}
+.transaction-header{display:flex;justify-content:space-between;flex-wrap:wrap;margin-bottom:12px;padding-bottom:8px;border-bottom:1px dashed #e2e8f0;}
+.transaction-id{font-family:monospace;font-size:11px;color:#64748b;background:#f1f5f9;padding:4px 12px;border-radius:30px;}
+.transaction-status{padding:4px 14px;border-radius:30px;font-size:11px;font-weight:bold;}
 .status-pending{background:#fef3c7;color:#d97706;}
 .status-success{background:#dcfce7;color:#16a34a;}
-.transaction-id{font-size:9px;color:#94a3b8;margin-top:8px;font-family:monospace;border-top:1px solid #e2e8f0;padding-top:8px;}
-.transaction-tracking{background:#e0f2fe;color:#0369a1;padding:3px 8px;border-radius:12px;font-size:10px;font-weight:bold;margin-top:6px;display:inline-block;}
-.empty-transactions{text-align:center;padding:50px 20px;color:#64748b;}
-.back-button{margin:20px auto 0;width:calc(100% - 40px);background:#1877f2;color:#fff;border:none;padding:14px;border-radius:30px;font-weight:bold;cursor:pointer;}
-.amount-display{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:12px;margin:10px 0;text-align:center;}
-.amount-display span{font-size:20px;font-weight:bold;color:#16a34a;}
-.price-note{font-size:11px;color:#64748b;margin-top:5px;}
-.currency-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:15px 0;}
-.currency-card{background:#fff;border-radius:16px;padding:15px;text-align:center;border:1px solid #e2e8f0;}
-.currency-name{font-size:14px;font-weight:bold;color:#1e293b;}
-.currency-rate{font-size:13px;color:#1877f2;font-weight:bold;margin-top:5px;}
-.provinces-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:15px 0;max-height:400px;overflow-y:auto;}
-.province-btn{background:#f1f5f9;border:none;padding:12px;border-radius:12px;font-size:13px;font-weight:bold;cursor:pointer;}
-.province-btn:hover{background:#1877f2;color:#fff;}
-.exchanger-info{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:12px;margin:10px 0;text-align:center;}
-.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;z-index:10000;}
-.modal-box{background:#fff;border-radius:28px;padding:28px;width:90%;max-width:340px;text-align:center;}
-.modal-box h3{color:#1e293b;margin-bottom:10px;}
-.modal-box input{width:100%;padding:14px;border:1px solid #e2e8f0;border-radius:16px;margin:15px 0;text-align:center;}
+.transaction-detail{font-size:13px;color:#334155;margin:6px 0;padding:4px 0;display:flex;flex-wrap:wrap;gap:8px;}
+.transaction-detail strong{color:#1e293b;min-width:110px;background:#f8fafc;padding:4px 10px;border-radius:20px;}
+.transaction-actions{display:flex;gap:12px;margin-top:15px;padding-top:10px;border-top:1px solid #e2e8f0;}
+.transaction-actions button{padding:8px 22px;border:none;border-radius:40px;cursor:pointer;font-size:13px;font-weight:bold;transition:0.2s;}
+.transaction-actions button:hover{transform:translateY(-2px);}
+.user-search{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;}
+.user-search input{flex:1;padding:14px;border:1px solid #e2e8f0;border-radius:20px;font-size:14px;}
+.user-info{background:linear-gradient(135deg,#f8fafc,#fff);border-radius:24px;padding:22px;transition:0.2s;}
+.user-info h3{color:#1e293b;margin-bottom:14px;font-size:20px;}
+.user-info p{margin:10px 0;color:#475569;padding:6px 0;border-bottom:1px solid #e2e8f0;}
+.balance-control{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;}
+.balance-control input{flex:1;padding:12px;border:1px solid #e2e8f0;border-radius:16px;}
+.provinces-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:15px;max-height:450px;overflow-y:auto;padding:5px;}
+@media (max-width:600px){.provinces-grid{grid-template-columns:repeat(2,1fr);}}
+.province-card{background:#f8fafc;border-radius:20px;padding:14px;border:1px solid #e2e8f0;transition:0.2s;}
+.province-card:hover{transform:translateY(-3px);box-shadow:0 6px 14px rgba(0,0,0,0.08);}
+.province-card h4{color:#1e293b;font-size:14px;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+.province-card input{width:100%;padding:10px;border:1px solid #e2e8f0;border-radius:12px;margin-top:6px;font-size:12px;}
+.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;z-index:1000;animation:modalFade 0.2s ease;}
+@keyframes modalFade{from{opacity:0;}to{opacity:1;}}
+.modal-content{background:#fff;border-radius:32px;padding:28px;width:90%;max-width:360px;text-align:center;animation:modalPop 0.3s cubic-bezier(0.2,0.9,0.4,1.1);}
+@keyframes modalPop{from{opacity:0;transform:scale(0.9);}to{opacity:1;transform:scale(1);}}
+.modal-content h3{color:#1e293b;margin-bottom:15px;}
+.modal-content input{width:100%;padding:14px;border:1px solid #e2e8f0;border-radius:20px;margin:15px 0;font-size:14px;}
 .modal-buttons{display:flex;gap:12px;}
-.modal-buttons button{flex:1;padding:12px;border-radius:40px;font-weight:bold;cursor:pointer;}
-.modal-buttons button:first-child{background:#1877f2;color:#fff;}
-.modal-buttons button:last-child{background:#e2e8f0;}
-.info-row-detail{font-size:11px;color:#475569;margin-top:3px;background:#f8fafc;padding:2px 8px;border-radius:12px;display:inline-block;margin-left:5px;}
-.detail-badge{background:#eef2ff;color:#1e40af;padding:3px 10px;border-radius:16px;font-size:10px;margin-top:4px;display:inline-block;}
+.modal-buttons button{flex:1;padding:12px;border-radius:40px;}
+.empty-state{text-align:center;padding:50px;color:#94a3b8;}
+.empty-state span{font-size:50px;opacity:0.5;}
 </style>
 </head>
 <body>
 <div id="msg" class="message"></div>
-<div id="sidebar" class="sidebar">
-<div class="sidebar-header"><span>منو</span><button onclick="toggleMenu()">✕</button></div>
-<a onclick="openSettingsPage()">⚙ تنظیمات</a>
-<a onclick="openWalletPage()">💰 کیف پول</a>
-<a onclick="openTransactionsPage()">📊 تراکنش‌ها</a>
-<a onclick="openSendMoneyPage()">💸 ارسال موجودی</a>
-<a onclick="openSupportPage()">🆘 پشتیبانی</a>
-<a onclick="logout()">🚪 خروج</a>
-</div>
 
+<!-- صفحه ورود -->
 <div id="loginPage" class="page active">
-<div class="container"><div class="card">
-<div class="logo-circle"><img src="https://flagcdn.com/w320/af.png"></div>
-<div class="logo-title">Afg Online Pay</div>
-<div class="sub-title">کیف پول دیجیتال افغانستان</div>
-<input id="loginEmail" type="email" placeholder="ایمیل">
-<div class="input-group"><input id="loginPassword" type="password" placeholder="رمز عبور"><span class="eye-btn" onclick="togglePassword('loginPassword')">👁</span></div>
-<button class="btn" onclick="loginUser()">ورود</button>
-<button class="btn secondary" onclick="showPage('registerPage')">ثبت نام</button>
-</div></div>
+<div class="login-container">
+<div class="login-card">
+<h2>👑 پنل مدیریت</h2>
+<p>Afg Online Pay</p>
+<input type="email" id="adminEmail" placeholder="ایمیل ادمین">
+<input type="password" id="adminPassword" placeholder="رمز عبور">
+<button onclick="adminLogin()">ورود به پنل</button>
 </div>
-
-<div id="registerPage" class="page">
-<div class="container"><div class="card">
-<div class="logo-title">ثبت نام</div>
-<input id="fullName" type="text" placeholder="نام کامل">
-<input id="email" type="email" placeholder="ایمیل">
-<div class="input-group"><input id="password" type="password" placeholder="رمز عبور"><span class="eye-btn" onclick="togglePassword('password')">👁</span></div>
-<div class="input-group"><input id="confirmPassword" type="password" placeholder="تکرار رمز"><span class="eye-btn" onclick="togglePassword('confirmPassword')">👁</span></div>
-<select id="country"><option>Afghanistan</option><option>Pakistan</option><option>Iran</option><option>India</option><option>Turkey</option><option>UAE</option><option>USA</option><option>UK</option></select>
-<button class="btn" onclick="registerUser()">ثبت نام</button>
-<button class="btn secondary" onclick="showPage('loginPage')">بازگشت</button>
-</div></div>
-</div>
-
-<div id="dashboardPage" class="page">
-<div class="dashboard">
-<div class="topbar">
-<div class="left"><button class="menu-btn" onclick="toggleMenu()">☰</button><div class="user-box"><img id="dashFlag"><span id="dashName">کاربر</span></div></div>
-<div id="dashBalanceTop">0 AFN</div>
-</div>
-<div class="balance"><h2 id="dashBalance">0 AFN</h2><p id="dashWallet"></p></div>
-<div class="quick-actions"><div class="quick-title">⚡ خدمات سریع</div>
-<div class="actions-grid">
-<div class="action-card" onclick="openSocialPage()"><span class="action-icon">📱</span><span class="action-name">شبکه های اجتماعی</span></div>
-<div class="action-card" onclick="openCreditPage()"><span class="action-icon">💳</span><span class="action-name">کریدت افغانستان</span></div>
-<div class="action-card" onclick="openInternetPage()"><span class="action-icon">🌐</span><span class="action-name">بسته های اینترنتی</span></div>
-<div class="action-card" onclick="openPeyPage()"><span class="action-icon">💰</span><span class="action-name">ارسال پول به حساب پی</span></div>
-<div class="action-card" onclick="openCryptoPage()"><span class="action-icon">₿</span><span class="action-name">ارز دیجیتال</span></div>
-<div class="action-card" onclick="openIranPage()"><span class="action-icon">🏦</span><span class="action-name">حواله بانکی ایران</span></div>
-<div class="action-card" onclick="openAfghanistanPage()"><span class="action-icon">🇦🇫</span><span class="action-name">حواله به افغانستان</span></div>
-<div class="action-card" onclick="openTurkeyPage()"><span class="action-icon">🇹🇷</span><span class="action-name">حواله به ترکیه</span></div>
-<div class="action-card" onclick="openMomoPage()"><span class="action-icon">📲</span><span class="action-name">ارسال پول به مومو</span></div>
-<div class="action-card" onclick="openExchangePage()"><span class="action-icon">💱</span><span class="action-name">قیمت اسعار خارجی</span></div>
-</div></div>
 </div>
 </div>
 
-<div id="socialPage" class="page"><div class="container"><div class="card settings-card">
-<div class="logo-title">📱 شبکه های اجتماعی</div>
-<div class="sub-title">قیمت هر واحد</div>
-<div class="social-grid">
-<div class="social-item" onclick="openBuySocial('الماس ایمو','emo')"><span class="social-icon">💎</span><span class="social-name">الماس ایمو</span><span class="social-price" id="price_emo_display">در حال بارگیری...</span></div>
-<div class="social-item" onclick="openBuySocial('یوسی پابجی','pubg')"><span class="social-icon">🎮</span><span class="social-name">یوسی پابجی</span><span class="social-price" id="price_pubg_display">در حال بارگیری...</span></div>
-<div class="social-item" onclick="openBuySocial('سکه هپی','happy')"><span class="social-icon">😊</span><span class="social-name">سکه هپی</span><span class="social-price" id="price_happy_display">در حال بارگیری...</span></div>
-<div class="social-item" onclick="openBuySocial('سکه بیگولایف','bigo')"><span class="social-icon">🎵</span><span class="social-name">سکه بیگولایف</span><span class="social-price" id="price_bigo_display">در حال بارگیری...</span></div>
-<div class="social-item" onclick="openBuySocial('سکه سایا','saya')"><span class="social-icon">📖</span><span class="social-name">سکه سایا</span><span class="social-price" id="price_saya_display">در حال بارگیری...</span></div>
-<div class="social-item" onclick="openBuySocial('سکه تیک تاک','tiktok')"><span class="social-icon">📱</span><span class="social-name">سکه تیک تاک</span><span class="social-price" id="price_tiktok_display">در حال بارگیری...</span></div>
+<!-- داشبورد ادمین -->
+<div id="adminDashboardPage" class="page">
+<div class="admin-header">
+<h2>👑 Afg Online Pay | مدیریت</h2>
+<button onclick="adminLogout()">🚪 خروج</button>
 </div>
-<button class="btn secondary" onclick="showPage('dashboardPage')">↩️ بازگشت</button>
-</div></div></div>
 
-<div id="buySocialPage" class="page"><div class="container"><div class="card settings-card">
-<div class="logo-title" id="buySocialTitle">خرید محصول</div>
-<div class="sub-title">اطلاعات را وارد کنید</div>
-<input type="text" id="socialUserId" placeholder="آیدی یا شماره خود را وارد کنید">
-<input type="number" id="socialQuantity" placeholder="تعداد مورد نیاز" oninput="calculateSocialPrice()">
-<div class="amount-display"><span id="socialTotalAmount">0</span> AFN</div>
-<div class="price-note" id="socialPriceNote">قیمت هر واحد: در حال بارگیری...</div>
-<button class="btn" onclick="submitSocialOrder()">ثبت سفارش</button>
-<button class="btn secondary" onclick="showPage('socialPage')">↩️ بازگشت</button>
-</div></div></div>
-
-<div id="creditPage" class="page"><div class="container"><div class="card settings-card">
-<div class="logo-title">💳 کریدت افغانستان</div>
-<div class="sub-title">شارژ اعتباری</div>
-<input type="tel" id="creditNumber" placeholder="شماره تلفن" maxlength="11">
-<input type="number" id="creditAmount" placeholder="مبلغ کریدت (واحد)" oninput="calculateCreditPrice()">
-<div class="amount-display"><span id="creditTotalAmount">0</span> AFN</div>
-<div class="price-note" id="creditPriceNote">قیمت هر واحد: در حال بارگیری...</div>
-<button class="btn" onclick="sendCredit()">ثبت سفارش</button>
-<button class="btn secondary" onclick="showPage('dashboardPage')">↩️ بازگشت</button>
-</div></div></div>
-
-<div id="internetPage" class="page"><div class="container"><div class="card settings-card">
-<div class="logo-title">🌐 بسته های اینترنتی</div>
-<div class="sub-title">انتخاب شبکه</div>
-<div class="network-grid">
-<button class="network-btn" onclick="selectNetwork('روشن')">📶 روشن</button>
-<button class="network-btn" onclick="selectNetwork('اتوما')">⚡ اتوما</button>
-<button class="network-btn" onclick="selectNetwork('سلام')">📱 سلام</button>
-<button class="network-btn" onclick="selectNetwork('اتصالات')">📶 اتصالات</button>
-<button class="network-btn" onclick="selectNetwork('افغان بیسیم')">📡 افغان بیسیم</button>
+<div class="admin-tabs">
+<button class="tab-btn active" onclick="showTab('dashboard')">📊 داشبورد</button>
+<button class="tab-btn" onclick="showTab('prices')">💰 قیمت‌ها</button>
+<button class="tab-btn" onclick="showTab('transactions')">📋 تراکنش‌ها</button>
+<button class="tab-btn" onclick="showTab('exchangers')">🏦 صرافی‌ها</button>
+<button class="tab-btn" onclick="showTab('users')">👥 کاربران</button>
+<button class="tab-btn" onclick="showTab('support')">🆘 پشتیبانی</button>
+<button class="tab-btn" onclick="showTab('settings')">⚙ تنظیمات</button>
 </div>
-<div id="packagesContainer" style="display:none;"><div class="sub-title">بسته های اینترنتی</div><div class="package-grid" id="packageGrid"></div></div>
-<button class="btn secondary" onclick="showPage('dashboardPage')">↩️ بازگشت</button>
-</div></div></div>
 
-<div id="cryptoPage" class="page"><div class="container"><div class="card settings-card">
-<div class="logo-title">₿ ارز دیجیتال</div>
-<div class="sub-title">انتخاب شبکه</div>
-<div class="network-grid">
-<button class="network-btn" onclick="openCryptoNetwork('BNB Smart Chain','usdt_bnb')">🔶 BNB Smart Chain</button>
-<button class="network-btn" onclick="openCryptoNetwork('TRC20 (USDT)','usdt_trc20')">💠 TRC20 (USDT)</button>
+<!-- تب داشبورد -->
+<div id="tabDashboard" class="tab-content active">
+<div class="stats-grid">
+<div class="stat-card" style="animation-delay:0s"><h3 id="statTotalBalance">0</h3><p>💰 مجموع موجودی</p></div>
+<div class="stat-card" style="background:linear-gradient(135deg,#f59e0b,#d97706);animation-delay:0.1s"><h3 id="statPending">0</h3><p>⏳ در انتظار</p></div>
+<div class="stat-card" style="background:linear-gradient(135deg,#10b981,#059669);animation-delay:0.2s"><h3 id="statSuccess">0</h3><p>✅ تایید شده</p></div>
+<div class="stat-card" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9);animation-delay:0.3s"><h3 id="statUsers">0</h3><p>👥 کاربران</p></div>
 </div>
-<button class="btn secondary" onclick="showPage('dashboardPage')">↩️ بازگشت</button>
-</div></div></div>
-
-<div id="cryptoBuyPage" class="page"><div class="container"><div class="card settings-card">
-<div class="logo-title" id="cryptoTitle">خرید ارز دیجیتال</div>
-<div class="sub-title">اطلاعات را وارد کنید</div>
-<input type="text" id="cryptoAddress" placeholder="آدرس کیف پول">
-<input type="number" id="cryptoAmount" placeholder="مقدار USDT" oninput="calculateCryptoPrice()">
-<div class="amount-display"><span id="cryptoTotalAmount">0</span> AFN</div>
-<div class="price-note" id="cryptoPriceNote">قیمت هر USDT: در حال بارگیری...</div>
-<button class="btn" onclick="submitCryptoOrder()">ثبت سفارش</button>
-<button class="btn secondary" onclick="showPage('cryptoPage')">↩️ بازگشت</button>
-</div></div></div>
-
-<div id="turkeyPage" class="page"><div class="container"><div class="card settings-card">
-<div class="logo-title">🇹🇷 حواله به ترکیه</div>
-<div class="sub-title">اطلاعات را وارد کنید</div>
-<input type="text" id="turkeyIban" placeholder="شماره کارت یا IBAN">
-<input type="number" id="turkeyAmount" placeholder="مبلغ به لیر" oninput="calculateTurkeyPrice()">
-<div class="amount-display"><span id="turkeyTotalAmount">0</span> AFN</div>
-<div class="price-note" id="turkeyPriceNote">نرخ هر لیر: در حال بارگیری...</div>
-<button class="btn" onclick="submitTurkeyOrder()">ثبت سفارش</button>
-<button class="btn secondary" onclick="showPage('dashboardPage')">↩️ بازگشت</button>
-</div></div></div>
-
-<div id="afghanistanPage" class="page"><div class="container"><div class="card settings-card">
-<div class="logo-title">🇦🇫 حواله به افغانستان</div>
-<div class="sub-title">انتخاب ولایت</div>
-<div class="provinces-grid" id="provincesGrid"></div>
-<button class="btn secondary" onclick="showPage('dashboardPage')">↩️ بازگشت</button>
-</div></div></div>
-
-<div id="afghanTransferPage" class="page"><div class="container"><div class="card settings-card">
-<div class="logo-title" id="afghanProvinceTitle">حواله به افغانستان</div>
-<div class="sub-title">اطلاعات حواله را وارد کنید</div>
-<input type="text" id="senderName" placeholder="نام فرستنده پول">
-<input type="text" id="senderPhone" placeholder="شماره تماس فرستنده">
-<input type="text" id="receiverName" placeholder="نام گیرنده پول">
-<input type="text" id="receiverFatherName" placeholder="نام پدر گیرنده پول">
-<input type="number" id="afghanMoneyAmount" placeholder="مبلغ پول به AFN" oninput="calculateAfghanPrice()">
-<div class="amount-display"><span id="afghanTotalAmount">0</span> AFN</div>
-<div class="price-note" id="afghanPriceNote">کارمزد + نرخ تبدیل: در حال بارگیری...</div>
-<div id="exchangerInfoDiv" class="exchanger-info" style="display:none;"><div class="exchanger-name" id="exchangerName"></div><div class="exchanger-phone" id="exchangerPhone"></div></div>
-<button class="btn" onclick="submitAfghanOrder()">ثبت سفارش</button>
-<button class="btn secondary" onclick="showPage('afghanistanPage')">↩️ بازگشت</button>
-</div></div></div>
-
-<div id="peyPage" class="page"><div class="container"><div class="card settings-card">
-<div class="logo-title">💰 ارسال پول به حساب پی</div>
-<div class="sub-title">انتقال به کیف پول پی</div>
-<input type="text" id="peyNumber" placeholder="شماره حساب پی">
-<input type="number" id="peyAmount" placeholder="مبلغ به AFN" oninput="calculatePeyPrice()">
-<div class="amount-display"><span id="peyTotalAmount">0</span> AFN</div>
-<div class="price-note" id="peyPriceNote">قیمت هر 100 AFN: در حال بارگیری...</div>
-<button class="btn" onclick="sendToPey()">ثبت سفارش</button>
-<button class="btn secondary" onclick="showPage('dashboardPage')">↩️ بازگشت</button>
-</div></div></div>
-
-<div id="momoPage" class="page"><div class="container"><div class="card settings-card">
-<div class="logo-title">📲 ارسال پول به مومو</div>
-<div class="sub-title">انتقال به کیف پول مومو</div>
-<input type="text" id="momoNumber" placeholder="شماره موبایل مومو">
-<input type="number" id="momoAmount" placeholder="مبلغ به AFN" oninput="calculateMomoPrice()">
-<div class="amount-display"><span id="momoTotalAmount">0</span> AFN</div>
-<div class="price-note" id="momoPriceNote">قیمت هر 100 AFN: در حال بارگیری...</div>
-<button class="btn" onclick="sendToMomo()">ثبت سفارش</button>
-<button class="btn secondary" onclick="showPage('dashboardPage')">↩️ بازگشت</button>
-</div></div></div>
-
-<div id="iranPage" class="page"><div class="container"><div class="card settings-card">
-<div class="logo-title">🏦 حواله بانکی ایران</div>
-<div class="sub-title">انتقال به حساب بانکی ایران</div>
-<input type="text" id="iranCard" placeholder="شماره کارت یا شبا">
-<input type="number" id="iranAmount" placeholder="مبلغ به تومان" oninput="calculateIranPrice()">
-<div class="amount-display"><span id="iranTotalAmount">0</span> AFN</div>
-<div class="price-note" id="iranPriceNote">قیمت هر تومان: در حال بارگیری...</div>
-<button class="btn" onclick="sendToIran()">ثبت سفارش</button>
-<button class="btn secondary" onclick="showPage('dashboardPage')">↩️ بازگشت</button>
-</div></div></div>
-
-<div id="exchangePage" class="page"><div class="container"><div class="card settings-card">
-<div class="logo-title">💱 قیمت اسعار خارجی</div>
-<div class="sub-title">نرخ‌های روز</div>
-<div class="currency-grid">
-<div class="currency-card"><div class="currency-name">💵 دلار به افغانی</div><div class="currency-rate" id="rateUSDToAFN">در حال بارگیری...</div></div>
-<div class="currency-card"><div class="currency-name">🇮🇷 تومان به افغانی</div><div class="currency-rate" id="rateTomanToAFN">در حال بارگیری...</div></div>
-<div class="currency-card"><div class="currency-name">🇹🇷 لیر به افغانی</div><div class="currency-rate" id="rateTRYToAFN">در حال بارگیری...</div></div>
-<div class="currency-card"><div class="currency-name">🇪🇺 یورو به افغانی</div><div class="currency-rate" id="rateEURToAFN">در حال بارگیری...</div></div>
-<div class="currency-card"><div class="currency-name">🇮🇷 تومان به دلار</div><div class="currency-rate" id="rateTomanToUSD">در حال بارگیری...</div></div>
-<div class="currency-card"><div class="currency-name">💵 دلار به تومان</div><div class="currency-rate" id="rateUSDToToman">در حال بارگیری...</div></div>
+<div class="section-card">
+<div class="section-title">📌 راهنمای سریع</div>
+<p style="color:#475569;line-height:2;">• قیمت‌ها به صورت <strong>هر یک واحد</strong> است (مثال: هر الماس ایمو = X AFN)<br>
+• برای تایید یا رد درخواست کاربران به بخش <strong>📋 تراکنش‌ها</strong> بروید<br>
+• برای افزایش یا کاهش موجودی کاربر به بخش <strong>👥 کاربران</strong> بروید<br>
+• برای تغییر شماره پشتیبانی به بخش <strong>🆘 پشتیبانی</strong> بروید</p>
 </div>
-<button class="btn secondary" onclick="showPage('dashboardPage')">↩️ بازگشت</button>
-</div></div></div>
+</div>
 
-<div id="walletPage" class="page"><div class="wallet-container"><div class="card-3d"><div class="flip-card-inner" id="flipCardInner" onclick="this.classList.toggle('flipped')"><div class="card-front-side"><div class="card-front-header"><div class="bank-name">AFG PAY</div><div class="visa-symbol">💳✨</div></div><div class="sim-card-chip"></div><div class="card-number-display" id="walletCardNumber">AFG0000</div><div class="card-info-row"><div class="cardholder-area"><div class="info-label">CARDHOLDER</div><div class="info-value" id="walletCardName">USER</div></div><div class="expiry-area"><div class="info-label">EXPIRY</div><div class="info-value">12/28</div></div></div><div class="balance-on-card"><div class="balance-title">موجودی قابل استفاده</div><div class="balance-number" id="walletCardBalance">0 AFN</div></div></div><div class="card-back-side"><div class="back-header-text">🔒 پرداخت امن</div><div class="black-magnetic"></div><div class="cvv-white-box"><span class="cvv-label-text">CVV2</span><span class="cvv-number">***</span></div><div class="password-secure-box"><span class="password-label-text">🔐 رمز عبور کارت (PIN)</span><span class="password-real-value" id="cardPassword">••••••</span></div><div class="back-footer-note">این کارت متعلق به Afg Online Pay است</div></div></div></div><button class="btn" onclick="showPage('dashboardPage')" style="background:#2563eb;">بازگشت</button></div></div>
+<!-- تب قیمت‌ها - هر یک واحد -->
+<div id="tabPrices" class="tab-content">
+<div class="section-card">
+<div class="section-title">📱 شبکه های اجتماعی (قیمت هر واحد)</div>
+<div class="price-grid">
+<div class="price-item"><label>💎 الماس ایمو (هر عدد)</label><input type="number" id="price_emo" placeholder="قیمت به AFN"></div>
+<div class="price-item"><label>🎮 یوسی پابجی (هر عدد)</label><input type="number" id="price_pubg" placeholder="قیمت به AFN"></div>
+<div class="price-item"><label>😊 سکه هپی (هر عدد)</label><input type="number" id="price_happy" placeholder="قیمت به AFN"></div>
+<div class="price-item"><label>🎵 سکه بیگو لایف (هر عدد)</label><input type="number" id="price_bigo" placeholder="قیمت به AFN"></div>
+<div class="price-item"><label>📖 سکه سایا (هر عدد)</label><input type="number" id="price_saya" placeholder="قیمت به AFN"></div>
+<div class="price-item"><label>📱 سکه تیک تاک (هر عدد)</label><input type="number" id="price_tiktok" placeholder="قیمت به AFN"></div>
+</div>
+</div>
 
-<div id="transactionsPage" class="page"><div class="transactions-container"><div class="transactions-header"><h2>📊 تراکنش‌ها</h2><p>گزارش کامل فعالیت‌های شما به همراه کد رهگیری</p></div><div id="transactionsList" class="transactions-list"><div class="empty-transactions"><span>💳</span><p>در حال بارگیری...</p></div></div><button class="back-button" onclick="showPage('dashboardPage')">↩️ بازگشت به صفحه اصلی</button></div></div>
+<div class="section-card">
+<div class="section-title">💳 کریدت افغانستان (قیمت هر واحد)</div>
+<div class="price-item"><label>📞 کریدت (هر واحد)</label><input type="number" id="price_credit" placeholder="قیمت به AFN"></div>
+</div>
 
-<div id="settingsPage" class="page"><div class="container"><div class="card settings-card"><div class="logo-title">تنظیمات حساب</div><div class="sub-title">تغییر رمز عبور</div><div class="input-group"><input id="oldPassword" type="password" placeholder="پسورد قبلی"><span class="eye-btn" onclick="togglePassword('oldPassword')">👁</span></div><div class="input-group"><input id="newPassword" type="password" placeholder="پسورد جدید"><span class="eye-btn" onclick="togglePassword('newPassword')">👁</span></div><div class="input-group"><input id="confirmNewPassword" type="password" placeholder="تکرار پسورد جدید"><span class="eye-btn" onclick="togglePassword('confirmNewPassword')">👁</span></div><button class="btn" onclick="changePassword()">ثبت تغییر</button><button class="btn secondary" onclick="showPage('dashboardPage')">بازگشت</button></div></div></div>
+<div class="section-card">
+<div class="section-title">🌐 بسته های اینترنتی (قیمت هر بسته)</div>
+<div id="internetPricesContainer"></div>
+</div>
 
-<div id="supportPage" class="page"><div class="container"><div class="card settings-card"><div class="logo-title">🆘 پشتیبانی</div><div class="sub-title">ارتباط با تیم پشتیبانی</div><div class="support-buttons"><button class="btn support-btn" onclick="openWhatsApp('support1')">📞 پشتیبانی اول برنامه</button><button class="btn support-btn" onclick="openWhatsApp('support2')">⚠️ مشکلات برنامه</button><button class="btn support-btn" onclick="openWhatsApp('support3')">💰 خزانه‌دار برنامه</button></div><button class="btn secondary" onclick="showPage('dashboardPage')">بازگشت</button></div></div></div>
+<div class="section-card">
+<div class="section-title">💰 کیف پول‌ها (قیمت هر 100 AFN)</div>
+<div class="price-grid">
+<div class="price-item"><label>📲 ارسال به حساب پی (هر 100 AFN)</label><input type="number" id="price_pey" placeholder="قیمت"></div>
+<div class="price-item"><label>📲 ارسال به مومو (هر 100 AFN)</label><input type="number" id="price_momo" placeholder="قیمت"></div>
+</div>
+</div>
 
-<div id="sendMoneyPage" class="page"><div class="container"><div class="card settings-card"><div class="logo-title">💸 ارسال موجودی</div><div class="sub-title">انتقال به کاربر دیگر</div><input type="text" id="sendToWalletId" placeholder="آیدی گیرنده (مثال: AFG1234567)"><input type="number" id="sendAmount" placeholder="مقدار به AFN"><button class="btn" onclick="sendMoney()">ثبت سفارش</button><button class="btn secondary" onclick="showPage('dashboardPage')">بازگشت</button></div></div></div>
+<div class="section-card">
+<div class="section-title">₿ ارز دیجیتال (قیمت هر USDT)</div>
+<div class="price-grid">
+<div class="price-item"><label>🔷 1 USDT (TRC20)</label><input type="number" id="price_usdt_trc20" placeholder="قیمت"></div>
+<div class="price-item"><label>🔶 1 USDT (BNB)</label><input type="number" id="price_usdt_bnb" placeholder="قیمت"></div>
+</div>
+</div>
+
+<div class="section-card">
+<div class="section-title">🏦 حواله‌ها (قیمت ثابت)</div>
+<div class="price-grid">
+<div class="price-item"><label>🇮🇷 حواله ایران (ثابت)</label><input type="number" id="price_iran" placeholder="قیمت به AFN"></div>
+<div class="price-item"><label>🇦🇫 حواله افغانستان (هزینه پایه)</label><input type="number" id="price_afghan" placeholder="قیمت پایه"></div>
+<div class="price-item"><label>🇹🇷 حواله ترکیه (نرخ هر لیر)</label><input type="number" id="price_turkey" placeholder="نرخ"></div>
+</div>
+</div>
+
+<div class="section-card">
+<div class="section-title">💱 نرخ اسعار خارجی</div>
+<div class="price-grid">
+<div class="price-item"><label>💵 دلار به افغانی</label><input type="number" id="rate_usd_afn" placeholder="نرخ"></div>
+<div class="price-item"><label>🇮🇷 تومان به افغانی</label><input type="number" id="rate_toman_afn" placeholder="نرخ" step="0.001"></div>
+<div class="price-item"><label>🇹🇷 لیر به افغانی</label><input type="number" id="rate_try_afn" placeholder="نرخ"></div>
+<div class="price-item"><label>🇪🇺 یورو به افغانی</label><input type="number" id="rate_eur_afn" placeholder="نرخ"></div>
+<div class="price-item"><label>🇮🇷 تومان به دلار</label><input type="number" id="rate_toman_usd" placeholder="نرخ" step="0.000001"></div>
+<div class="price-item"><label>💵 دلار به تومان</label><input type="number" id="rate_usd_toman" placeholder="نرخ"></div>
+</div>
+</div>
+
+<button class="btn btn-success" onclick="saveAllPrices()">💾 ذخیره همه قیمت‌ها</button>
+</div>
+
+<!-- تب تراکنش‌ها -->
+<div id="tabTransactions" class="tab-content">
+<div class="section-card">
+<div class="section-title">⏳ تراکنش‌های در انتظار تایید</div>
+<div id="pendingTransactionsList">در حال بارگیری...</div>
+</div>
+<div class="section-card">
+<div class="section-title">✅ تراکنش‌های تایید شده</div>
+<div id="successTransactionsList">در حال بارگیری...</div>
+</div>
+</div>
+
+<!-- تب صرافی‌ها -->
+<div id="tabExchangers" class="tab-content">
+<div class="section-card">
+<div class="section-title">🏦 مدیریت صرافی‌های ولایات</div>
+<div id="provincesList" class="provinces-grid"></div>
+<button class="btn btn-success" onclick="saveAllExchangers()" style="margin-top:20px;">💾 ذخیره همه صرافی‌ها</button>
+</div>
+</div>
+
+<!-- تب کاربران -->
+<div id="tabUsers" class="tab-content">
+<div class="section-card">
+<div class="section-title">🔍 جستجوی کاربر</div>
+<div class="user-search">
+<input type="text" id="searchUserId" placeholder="آیدی کیف پول (مثال: AFG1234567)">
+<button class="btn-success" onclick="searchUser()" style="width:auto;padding:12px 24px;">جستجو</button>
+</div>
+<div id="userInfoResult"></div>
+</div>
+</div>
+
+<!-- تب پشتیبانی -->
+<div id="tabSupport" class="tab-content">
+<div class="section-card">
+<div class="section-title">🆘 شماره‌های پشتیبانی (واتساپ)</div>
+<div class="price-grid">
+<div class="price-item"><label>📞 پشتیبانی اول برنامه</label><input type="text" id="support1" placeholder="شماره واتساپ"></div>
+<div class="price-item"><label>⚠️ مشکلات برنامه</label><input type="text" id="support2" placeholder="شماره واتساپ"></div>
+<div class="price-item"><label>💰 خزانه‌دار برنامه</label><input type="text" id="support3" placeholder="شماره واتساپ"></div>
+</div>
+<button class="btn btn-success" onclick="saveSupportNumbers()" style="margin-top:15px;">💾 ذخیره شماره‌ها</button>
+</div>
+</div>
+
+<!-- تب تنظیمات ادمین -->
+<div id="tabSettings" class="tab-content">
+<div class="section-card">
+<div class="section-title">⚙ تغییر اطلاعات ادمین</div>
+<input type="email" id="newAdminEmail" placeholder="ایمیل جدید ادمین">
+<input type="password" id="newAdminPassword" placeholder="رمز جدید ادمین">
+<input type="password" id="confirmAdminPassword" placeholder="تکرار رمز جدید">
+<button class="btn btn-success" onclick="updateAdminInfo()">💾 ذخیره تغییرات</button>
+</div>
+</div>
+</div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updatePassword, EmailAuthProvider, reauthenticateWithCredential } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, addDoc, query, where, getDocs, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, query, where, getDocs, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
 apiKey:"AIzaSyDyhOOxlKE6qj1hD1iDTdhyVTbN6gDfOcw",
@@ -375,491 +284,319 @@ appId:"1:912268192061:web:88741dd5ad9d55ee17bd54"
 };
 
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
 const db = getFirestore(app);
 
-let currentNetwork = "";
-let currentSocialItem = "", currentSocialPriceKey = "", currentSocialPriceValue = 0;
-let currentCryptoNetwork = "", currentCryptoPriceKey = "", currentCryptoPriceValue = 0;
-let currentProvince = "";
-let internetPrices = {}, exchangeRates = {}, socialPrices = {};
-let creditUnitPrice = 0, peyUnitPrice = 0, momoUnitPrice = 0, iranUnitPrice = 0, turkeyRate = 0, afghanFeeRate = 0.05, afghanBasePrice = 0;
-
+let currentAdmin = null;
+const internetNetworks = ["روشن", "اتوما", "سلام", "اتصالات", "افغان بیسیم"];
+const internetPackages = [1, 2, 3, 5, 10, 20];
 const provinces = ["کابل","کندهار","هرات","مزارشریف","قندهار","بلخ","تخار","بدخشان","بغلان","بامیان","دایکندی","فراه","فاریاب","غزنی","غور","هلمند","جوزجان","کنر","لغمان","لوگر","ننگرهار","نیمروز","نورستان","پکتیا","پکتیکا","پنجشیر","پروان","سمنگان","سرپل","وردک","زابل","کاپیسا","خوست"];
-let exchangersData = {};
 
-window.showPage = (id)=>{document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));document.getElementById(id).classList.add("active");};
-window.togglePassword = (id)=>{let i=document.getElementById(id);i.type=i.type==="password"?"text":"password";};
-window.toggleMenu = ()=>{document.getElementById("sidebar").classList.toggle("active");};
+function msg(text, type) {
+let m = document.getElementById("msg");
+m.style.background = type === "success" ? "#10b981" : (type === "error" ? "#ef4444" : "#1877f2");
+m.innerText = text;
+m.style.display = "block";
+setTimeout(() => { m.style.display = "none"; }, 3000);
+}
 
-function msg(text,type){let m=document.getElementById("msg");m.className="message "+type;m.innerText=text;m.style.display="block";setTimeout(()=>{m.style.display="none";},3000);}
+window.adminLogin = () => {
+let email = document.getElementById("adminEmail").value.trim();
+let password = document.getElementById("adminPassword").value;
+if (email === "admin@sarafi.com" && password === "Arash@12345") {
+currentAdmin = { email: email };
+msg("ورود موفق ✅", "success");
+document.getElementById("loginPage").classList.remove("active");
+document.getElementById("adminDashboardPage").classList.add("active");
+loadAllData();
+loadStats();
+} else { msg("ایمیل یا رمز عبور اشتباه است ❌", "error"); }
+};
 
-function showPhoneModal(title,callback){
-let modal=document.createElement("div");
-modal.className="modal-overlay";
-modal.innerHTML=`<div class="modal-box"><h3>📞 ${title}</h3><p>لطفاً شماره تلفن خود را وارد کنید</p><input type="tel" id="modalPhone" placeholder="مثال: 07xxxxxxxx"><div class="modal-buttons"><button id="modalConfirm">تایید</button><button id="modalCancel">انصراف</button></div></div>`;
+window.adminLogout = () => {
+currentAdmin = null;
+document.getElementById("adminDashboardPage").classList.remove("active");
+document.getElementById("loginPage").classList.add("active");
+};
+
+window.showTab = (tab) => {
+document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+document.querySelectorAll(".tab-content").forEach(content => content.classList.remove("active"));
+let tabs = {dashboard:0, prices:1, transactions:2, exchangers:3, users:4, support:5, settings:6};
+document.querySelectorAll(".tab-btn")[tabs[tab]].classList.add("active");
+document.getElementById(`tab${tab.charAt(0).toUpperCase()+tab.slice(1)}`).classList.add("active");
+if(tab === 'transactions') loadTransactions();
+if(tab === 'dashboard') loadStats();
+if(tab === 'exchangers') loadExchangers();
+if(tab === 'support') loadSupportNumbers();
+};
+
+async function loadStats() {
+try {
+let usersSnap = await getDocs(collection(db, "users"));
+let totalBalance = 0;
+usersSnap.forEach(doc => { totalBalance += doc.data().balance || 0; });
+document.getElementById("statTotalBalance").innerHTML = totalBalance.toLocaleString();
+document.getElementById("statUsers").innerHTML = usersSnap.size;
+let txSnap = await getDocs(collection(db, "transactions"));
+let pending = 0, success = 0;
+txSnap.forEach(doc => { let s = doc.data().status; if (s === "pending") pending++; else if (s === "success") success++; });
+document.getElementById("statPending").innerHTML = pending;
+document.getElementById("statSuccess").innerHTML = success;
+} catch(e) { console.error(e); }
+}
+
+async function loadAllData() {
+let p = await getDoc(doc(db, "admin", "prices"));
+if (p.exists()) { let d = p.data();
+document.getElementById("price_emo") && (document.getElementById("price_emo").value = d.emo || "");
+document.getElementById("price_pubg") && (document.getElementById("price_pubg").value = d.pubg || "");
+document.getElementById("price_happy") && (document.getElementById("price_happy").value = d.happy || "");
+document.getElementById("price_bigo") && (document.getElementById("price_bigo").value = d.bigo || "");
+document.getElementById("price_saya") && (document.getElementById("price_saya").value = d.saya || "");
+document.getElementById("price_tiktok") && (document.getElementById("price_tiktok").value = d.tiktok || "");
+document.getElementById("price_credit") && (document.getElementById("price_credit").value = d.credit || "");
+document.getElementById("price_pey") && (document.getElementById("price_pey").value = d.pey || "");
+document.getElementById("price_momo") && (document.getElementById("price_momo").value = d.momo || "");
+document.getElementById("price_usdt_trc20") && (document.getElementById("price_usdt_trc20").value = d.usdt_trc20 || "");
+document.getElementById("price_usdt_bnb") && (document.getElementById("price_usdt_bnb").value = d.usdt_bnb || "");
+document.getElementById("price_iran") && (document.getElementById("price_iran").value = d.iran || "");
+document.getElementById("price_afghan") && (document.getElementById("price_afghan").value = d.afghan || "");
+document.getElementById("price_turkey") && (document.getElementById("price_turkey").value = d.turkey || "");
+}
+let r = await getDoc(doc(db, "admin", "exchange_rates"));
+if (r.exists()) { let d = r.data();
+document.getElementById("rate_usd_afn") && (document.getElementById("rate_usd_afn").value = d.usd_afn || "");
+document.getElementById("rate_toman_afn") && (document.getElementById("rate_toman_afn").value = d.toman_afn || "");
+document.getElementById("rate_try_afn") && (document.getElementById("rate_try_afn").value = d.try_afn || "");
+document.getElementById("rate_eur_afn") && (document.getElementById("rate_eur_afn").value = d.eur_afn || "");
+document.getElementById("rate_toman_usd") && (document.getElementById("rate_toman_usd").value = d.toman_usd || "");
+document.getElementById("rate_usd_toman") && (document.getElementById("rate_usd_toman").value = d.usd_toman || "");
+}
+let container = document.getElementById("internetPricesContainer");
+if (container) {
+container.innerHTML = "";
+let existing = await getDoc(doc(db, "admin", "internet_prices"));
+let data = existing.exists() ? existing.data() : {};
+for (let net of internetNetworks) {
+let div = document.createElement("div"); div.className = "package-network";
+div.innerHTML = `<h4>📶 ${net}</h4><div class="package-row" id="pkg_${net.replace(/\s/g, '')}"></div>`;
+container.appendChild(div);
+let row = div.querySelector(".package-row");
+for (let gb of internetPackages) {
+let key = `${net}_${gb}`;
+let val = data[key] || "";
+let item = document.createElement("div"); item.className = "price-item";
+item.innerHTML = `<label>${gb} GB</label><input type="number" id="pkg_${key.replace(/\s/g, '_')}" value="${val}">`;
+row.appendChild(item);
+}
+}
+}
+}
+
+window.saveAllPrices = async () => {
+let prices = {
+emo: document.getElementById("price_emo")?.value, pubg: document.getElementById("price_pubg")?.value,
+happy: document.getElementById("price_happy")?.value, bigo: document.getElementById("price_bigo")?.value,
+saya: document.getElementById("price_saya")?.value, tiktok: document.getElementById("price_tiktok")?.value,
+credit: document.getElementById("price_credit")?.value, pey: document.getElementById("price_pey")?.value,
+momo: document.getElementById("price_momo")?.value, usdt_trc20: document.getElementById("price_usdt_trc20")?.value,
+usdt_bnb: document.getElementById("price_usdt_bnb")?.value, iran: document.getElementById("price_iran")?.value,
+afghan: document.getElementById("price_afghan")?.value, turkey: document.getElementById("price_turkey")?.value
+};
+await setDoc(doc(db, "admin", "prices"), prices);
+let internetPrices = {};
+for (let net of internetNetworks) {
+for (let gb of internetPackages) {
+let key = `${net}_${gb}`;
+let input = document.getElementById(`pkg_${key.replace(/\s/g, '_')}`);
+if (input) internetPrices[key] = input.value;
+}
+}
+await setDoc(doc(db, "admin", "internet_prices"), internetPrices);
+let rates = {
+usd_afn: document.getElementById("rate_usd_afn")?.value, toman_afn: document.getElementById("rate_toman_afn")?.value,
+try_afn: document.getElementById("rate_try_afn")?.value, eur_afn: document.getElementById("rate_eur_afn")?.value,
+toman_usd: document.getElementById("rate_toman_usd")?.value, usd_toman: document.getElementById("rate_usd_toman")?.value
+};
+await setDoc(doc(db, "admin", "exchange_rates"), rates);
+msg("همه قیمت‌ها ذخیره شد ✅", "success");
+};
+
+async function loadTransactions() {
+let pendingDiv = document.getElementById("pendingTransactionsList");
+let successDiv = document.getElementById("successTransactionsList");
+pendingDiv.innerHTML = "<div class='empty-state'><span>⏳</span><p>در حال بارگیری...</p></div>";
+successDiv.innerHTML = "<div class='empty-state'><span>⏳</span><p>در حال بارگیری...</p></div>";
+try {
+let q = query(collection(db, "transactions"), orderBy("timestamp", "desc"));
+let snap = await getDocs(q);
+let pending = [], success = [];
+snap.forEach(doc => { let data = doc.data(); data.id = doc.id; if (data.status === "pending") pending.push(data); else if (data.status === "success") success.push(data); });
+if (pending.length === 0) pendingDiv.innerHTML = "<div class='empty-state'><span>✅</span><p>هیچ تراکنش در انتظاری وجود ندارد</p></div>";
+else { pendingDiv.innerHTML = ""; pending.forEach(tx => pendingDiv.appendChild(createTxCard(tx))); }
+if (success.length === 0) successDiv.innerHTML = "<div class='empty-state'><span>📭</span><p>هیچ تراکنش تایید شده‌ای وجود ندارد</p></div>";
+else { successDiv.innerHTML = ""; success.slice(0, 30).forEach(tx => successDiv.appendChild(createTxCard(tx, true))); }
+} catch(e) { pendingDiv.innerHTML = "<div class='empty-state'><span>❌</span><p>خطا در بارگیری</p></div>"; }
+}
+
+function createTxCard(tx, isSuccess = false) {
+let div = document.createElement("div");
+div.className = `transaction-item ${tx.status}`;
+let date = new Date(tx.timestamp);
+let persianDate = date.toLocaleDateString('fa-IR');
+let time = date.toLocaleTimeString('fa-IR', {hour:'2-digit', minute:'2-digit'});
+let details = `<div class="transaction-header"><span class="transaction-id">🆔 ${tx.id.slice(0,12)}...</span><span class="transaction-status status-${tx.status}">${tx.status === 'pending' ? '⏳ در انتظار' : '✓ تایید شده'}</span></div>
+<div class="transaction-detail"><strong>📅 تاریخ:</strong> ${persianDate} - ${time}</div>
+<div class="transaction-detail"><strong>💰 مبلغ:</strong> ${tx.amount?.toLocaleString()} AFN</div>
+<div class="transaction-detail"><strong>📱 سرویس:</strong> ${tx.service || 'انتقال داخلی'}</div>
+<div class="transaction-detail"><strong>🆔 آیدی کاربر:</strong> ${tx.fromUserId || '-'}</div>`;
+if (tx.service === "حواله افغانستان") {
+details += `<div class="transaction-detail"><strong>🇦🇫 ولایت:</strong> ${tx.province || '-'}</div>
+<div class="transaction-detail"><strong>👤 فرستنده:</strong> ${tx.senderName || '-'}</div>
+<div class="transaction-detail"><strong>👤 گیرنده:</strong> ${tx.receiverName || '-'}</div>
+<div class="transaction-detail"><strong>👨 نام پدر:</strong> ${tx.receiverFatherName || '-'}</div>`;
+if (tx.trackingNumber) details += `<div class="transaction-detail" style="background:#dcfce7;padding:10px;border-radius:16px;margin-top:8px;"><strong>✅ نمبر حواله:</strong> ${tx.trackingNumber}</div>`;
+}
+if (tx.service === "کریدت افغانستان") details += `<div class="transaction-detail"><strong>📞 شماره:</strong> ${tx.number || '-'}</div>`;
+if (tx.service === "بسته اینترنتی") details += `<div class="transaction-detail"><strong>📶 شبکه:</strong> ${tx.network || '-'}</div><div class="transaction-detail"><strong>📦 بسته:</strong> ${tx.package || '-'}</div><div class="transaction-detail"><strong>📞 شماره:</strong> ${tx.number || '-'}</div>`;
+if (tx.service === "ارز دیجیتال") details += `<div class="transaction-detail"><strong>🔗 شبکه:</strong> ${tx.network || '-'}</div><div class="transaction-detail"><strong>💰 USDT:</strong> ${tx.usdtAmount || '-'}</div><div class="transaction-detail"><strong>🏦 آدرس:</strong> ${tx.address || '-'}</div>`;
+if (tx.service === "حواله به ترکیه") details += `<div class="transaction-detail"><strong>🏦 IBAN:</strong> ${tx.iban || '-'}</div><div class="transaction-detail"><strong>💰 مقدار لیر:</strong> ${tx.liraAmount || '-'}</div>`;
+div.innerHTML = details;
+if (!isSuccess && tx.status === "pending") {
+let actions = document.createElement("div"); actions.className = "transaction-actions";
+let approveBtn = document.createElement("button"); approveBtn.innerHTML = "✓ تایید"; approveBtn.style.background = "#10b981"; approveBtn.style.color = "white";
+approveBtn.onclick = () => { if (tx.service === "حواله افغانستان") showTrackingModal(tx); else approveTx(tx); };
+let rejectBtn = document.createElement("button"); rejectBtn.innerHTML = "✗ رد"; rejectBtn.style.background = "#ef4444"; rejectBtn.style.color = "white";
+rejectBtn.onclick = () => rejectTx(tx);
+actions.appendChild(approveBtn); actions.appendChild(rejectBtn);
+div.appendChild(actions);
+}
+return div;
+}
+
+function showTrackingModal(tx) {
+let modal = document.createElement("div"); modal.className = "modal";
+modal.innerHTML = `<div class="modal-content"><h3>🏦 ثبت نمبر حواله</h3><input type="text" id="trackingInput" placeholder="مثال: H12345678"><div class="modal-buttons"><button class="btn-success" id="confirmTracking">تایید</button><button class="btn-danger" id="cancelTracking">انصراف</button></div></div>`;
 document.body.appendChild(modal);
-document.getElementById("modalConfirm").onclick=()=>{let phone=document.getElementById("modalPhone").value.trim();if(phone && phone.length>=10){callback(phone);modal.remove();}else msg("شماره معتبر وارد کنید","error");};
-document.getElementById("modalCancel").onclick=()=>modal.remove();
+document.getElementById("confirmTracking").onclick = () => {
+let tracking = document.getElementById("trackingInput").value.trim();
+if (tracking) { approveTx(tx, tracking); modal.remove(); }
+else msg("لطفاً نمبر حواله را وارد کنید", "error");
+};
+document.getElementById("cancelTracking").onclick = () => modal.remove();
 }
 
-async function loadPrices(){
-try{
-let priceDoc=await getDoc(doc(db,"admin","prices"));
-if(priceDoc.exists()){
-let p=priceDoc.data();
-socialPrices={emo:Number(p.emo)||0, pubg:Number(p.pubg)||0, happy:Number(p.happy)||0, bigo:Number(p.bigo)||0, saya:Number(p.saya)||0, tiktok:Number(p.tiktok)||0};
-document.getElementById("price_emo_display")&&(document.getElementById("price_emo_display").innerHTML=`${socialPrices.emo} AFN`);
-document.getElementById("price_pubg_display")&&(document.getElementById("price_pubg_display").innerHTML=`${socialPrices.pubg} AFN`);
-document.getElementById("price_happy_display")&&(document.getElementById("price_happy_display").innerHTML=`${socialPrices.happy} AFN`);
-document.getElementById("price_bigo_display")&&(document.getElementById("price_bigo_display").innerHTML=`${socialPrices.bigo} AFN`);
-document.getElementById("price_saya_display")&&(document.getElementById("price_saya_display").innerHTML=`${socialPrices.saya} AFN`);
-document.getElementById("price_tiktok_display")&&(document.getElementById("price_tiktok_display").innerHTML=`${socialPrices.tiktok} AFN`);
-creditUnitPrice=Number(p.credit)||0;
-peyUnitPrice=Number(p.pey)||0;
-momoUnitPrice=Number(p.momo)||0;
-iranUnitPrice=Number(p.iran)||0;
-turkeyRate=Number(p.turkey)||0;
-afghanBasePrice=Number(p.afghan)||0;
-document.getElementById("creditPriceNote")&&(document.getElementById("creditPriceNote").innerHTML=`قیمت هر واحد: ${creditUnitPrice} AFN`);
-document.getElementById("peyPriceNote")&&(document.getElementById("peyPriceNote").innerHTML=`کارمزد هر 100 AFN: ${peyUnitPrice} AFN`);
-document.getElementById("momoPriceNote")&&(document.getElementById("momoPriceNote").innerHTML=`کارمزد هر 100 AFN: ${momoUnitPrice} AFN`);
-document.getElementById("iranPriceNote")&&(document.getElementById("iranPriceNote").innerHTML=`قیمت هر تومان: ${iranUnitPrice} AFN`);
-document.getElementById("turkeyPriceNote")&&(document.getElementById("turkeyPriceNote").innerHTML=`نرخ هر لیر: ${turkeyRate} AFN`);
-document.getElementById("afghanPriceNote")&&(document.getElementById("afghanPriceNote").innerHTML=`کارمزد ${afghanFeeRate*100}% + هزینه پایه ${afghanBasePrice} AFN`);
-}
-let internetDoc=await getDoc(doc(db,"admin","internet_prices"));
-if(internetDoc.exists()) internetPrices=internetDoc.data();
-let rateDoc=await getDoc(doc(db,"admin","exchange_rates"));
-if(rateDoc.exists()){
-exchangeRates=rateDoc.data();
-document.getElementById("rateUSDToAFN")&&(document.getElementById("rateUSDToAFN").innerHTML=`${exchangeRates.usd_afn||0} AFN`);
-document.getElementById("rateTomanToAFN")&&(document.getElementById("rateTomanToAFN").innerHTML=`${exchangeRates.toman_afn||0} AFN`);
-document.getElementById("rateTRYToAFN")&&(document.getElementById("rateTRYToAFN").innerHTML=`${exchangeRates.try_afn||0} AFN`);
-document.getElementById("rateEURToAFN")&&(document.getElementById("rateEURToAFN").innerHTML=`${exchangeRates.eur_afn||0} AFN`);
-document.getElementById("rateTomanToUSD")&&(document.getElementById("rateTomanToUSD").innerHTML=`${exchangeRates.toman_usd||0} USD`);
-document.getElementById("rateUSDToToman")&&(document.getElementById("rateUSDToToman").innerHTML=`${exchangeRates.usd_toman||0} تومان`);
-}
-let exchDoc=await getDoc(doc(db,"admin","exchangers"));
-if(exchDoc.exists()) exchangersData=exchDoc.data();
-}catch(e){console.error(e);}
+async function approveTx(tx, tracking = null) {
+if (tracking) await updateDoc(doc(db, "transactions", tx.id), { status: "success", trackingNumber: tracking });
+else await updateDoc(doc(db, "transactions", tx.id), { status: "success" });
+msg(tracking ? `✅ حواله تایید شد. نمبر: ${tracking}` : "✅ تراکنش تایید شد", "success");
+loadTransactions(); loadStats();
 }
 
-function updateBalanceUI(balance){
-let formattedBalance = (balance && !isNaN(balance)) ? Number(balance).toFixed(0) : "0";
-document.getElementById("dashBalance").innerText = formattedBalance + " AFN";
-document.getElementById("dashBalanceTop").innerText = formattedBalance + " AFN";
-if(document.getElementById("walletCardBalance")){
-document.getElementById("walletCardBalance").innerText = formattedBalance + " AFN";
+async function rejectTx(tx) {
+if (confirm("⚠️ رد تراکنش؟ موجودی به کاربر برگشت می‌خورد")) {
+let userRef = doc(db, "users", tx.fromUserId);
+let userSnap = await getDoc(userRef);
+await updateDoc(userRef, { balance: (userSnap.data().balance || 0) + tx.amount });
+await updateDoc(doc(db, "transactions", tx.id), { status: "rejected" });
+msg("❌ تراکنش رد شد و موجودی برگشت داده شد", "success");
+loadTransactions(); loadStats();
 }
-window.currentUserBalance = balance;
 }
 
-window.registerUser = async ()=>{
-let fullName=document.getElementById("fullName").value.trim();
-let email=document.getElementById("email").value.trim();
-let pass=document.getElementById("password").value;
-let con=document.getElementById("confirmPassword").value;
-let country=document.getElementById("country").value;
-if(!fullName||!email||!pass||!con){msg("تمام فیلدها ضروری است","error");return;}
-if(pass!==con){msg("رمزها برابر نیست","error");return;}
-try{
-let user=await createUserWithEmailAndPassword(auth,email,pass);
-let wallet="AFG"+Date.now().toString().slice(-7);
-await setDoc(doc(db,"users",user.user.uid),{fullName,email,country,walletId:wallet,balance:0});
-msg("ثبت نام موفق","success");
-showPage("loginPage");
-}catch(e){msg("خطا در ثبت نام","error");}
-};
-
-window.loginUser = async ()=>{
-let email=document.getElementById("loginEmail").value.trim();
-let pass=document.getElementById("loginPassword").value;
-if(!email||!pass){msg("ایمیل و رمز لازم است","error");return;}
-try{
-let user=await signInWithEmailAndPassword(auth,email,pass);
-let snap=await getDoc(doc(db,"users",user.user.uid));
-let data=snap.data();
-window.currentUserId=user.user.uid;
-window.currentUserBalance=data.balance;
-window.currentUserWallet=data.walletId;
-window.currentUserPassword=pass;
-window.currentUserName=data.fullName;
-document.getElementById("dashName").innerText=data.fullName;
-document.getElementById("dashWallet").innerText=data.walletId;
-updateBalanceUI(data.balance);
-const flags={Afghanistan:"https://flagcdn.com/w40/af.png",Pakistan:"https://flagcdn.com/w40/pk.png",Iran:"https://flagcdn.com/w40/ir.png",India:"https://flagcdn.com/w40/in.png",Turkey:"https://flagcdn.com/w40/tr.png",USA:"https://flagcdn.com/w40/us.png",UK:"https://flagcdn.com/w40/gb.png"};
-document.getElementById("dashFlag").src=flags[data.country]||flags.Afghanistan;
-await loadPrices();
-showPage("dashboardPage");
-msg("خوش آمدید","success");
-}catch(e){msg("ورود ناموفق","error");}
-};
-
-window.openWalletPage = ()=>{
-let walletId=document.getElementById("dashWallet").innerText;
-let formatted=walletId.length>4 ? walletId.match(/.{1,4}/g)?.join(" ") : walletId;
-document.getElementById("walletCardNumber").innerText=formatted;
-document.getElementById("walletCardName").innerText=document.getElementById("dashName").innerText;
-document.getElementById("walletCardBalance").innerText=document.getElementById("dashBalance").innerText;
-document.getElementById("cardPassword").innerHTML=window.currentUserPassword||"••••••";
-let flipCard=document.getElementById("flipCardInner");
-if(flipCard.classList.contains("flipped")) flipCard.classList.remove("flipped");
-showPage("walletPage");
-};
-
-window.openTransactionsPage = async () => {
-showPage("transactionsPage");
-document.getElementById("sidebar").classList.remove("active");
-if(!window.currentUserId){msg("لطفاً ابتدا وارد شوید","error");return;}
-try{
-const q=query(collection(db,"transactions"),where("fromUserId","==",window.currentUserId));
-const snap=await getDocs(q);
-const container=document.getElementById("transactionsList");
-if(snap.empty){container.innerHTML=`<div class="empty-transactions"><span>💳</span><p>هیچ تراکنشی یافت نشد</p></div>`;return;}
-let transactions=[];
-snap.forEach(doc=>{let data=doc.data();data.id=doc.id;transactions.push(data);});
-transactions.sort((a,b)=>new Date(b.timestamp)-new Date(a.timestamp));
-container.innerHTML="";
-let i=0;
-transactions.forEach(tx=>{
-const date=new Date(tx.timestamp);
-const persianDate=date.toLocaleDateString('fa-IR');
-const time=date.toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'});
-let detailsHtml = `<div class="transaction-title">${tx.service||"تراکنش"}</div>`;
-detailsHtml += `<div class="transaction-time">🕐 ${persianDate} - ${time}</div>`;
-if(tx.senderName) detailsHtml += `<div class="detail-badge">👤 فرستنده: ${tx.senderName}</div>`;
-if(tx.senderPhone) detailsHtml += `<div class="detail-badge">📞 تماس: ${tx.senderPhone}</div>`;
-if(tx.receiverName) detailsHtml += `<div class="detail-badge">👥 گیرنده: ${tx.receiverName}</div>`;
-if(tx.receiverFatherName) detailsHtml += `<div class="detail-badge">👨 نام پدر: ${tx.receiverFatherName}</div>`;
-if(tx.province) detailsHtml += `<div class="detail-badge">📍 ولایت: ${tx.province}</div>`;
-if(tx.exchangerName) detailsHtml += `<div class="detail-badge">🏦 صرافی: ${tx.exchangerName}</div>`;
-if(tx.number) detailsHtml += `<div class="detail-badge">📱 شماره: ${tx.number}</div>`;
-if(tx.quantity) detailsHtml += `<div class="detail-badge">🔢 تعداد: ${tx.quantity}</div>`;
-if(tx.item) detailsHtml += `<div class="detail-badge">🎁 آیتم: ${tx.item}</div>`;
-if(tx.cardNumber) detailsHtml += `<div class="detail-badge">💳 شماره کارت: ${tx.cardNumber}</div>`;
-if(tx.iban) detailsHtml += `<div class="detail-badge">🏦 IBAN: ${tx.iban}</div>`;
-if(tx.trackingCode) detailsHtml += `<div class="transaction-tracking">🎫 کد رهگیری: ${tx.trackingCode}</div>`;
-const card=document.createElement("div");
-card.className="transaction-card";
-card.style.animationDelay=(i*0.05)+"s";
-card.innerHTML=`<div class="transaction-row"><div class="transaction-icon">📝</div><div class="transaction-details">${detailsHtml}<div class="transaction-status ${tx.status==="pending"?"status-pending":"status-success"}">${tx.status==="pending"?"⏳ در انتظار تایید":"✓ انجام شده"}</div></div><div class="transaction-amount">- ${(tx.amount && !isNaN(tx.amount)) ? Number(tx.amount).toLocaleString() : "0"} AFN</div></div><div class="transaction-id">🆔 کد: ${tx.id.slice(0,8)}...</div>`;
-container.appendChild(card);
-i++;
-});
-}catch(e){console.error(e);msg("خطا: "+e.message,"error");}
-};
-
-window.openSettingsPage = ()=>{showPage("settingsPage");document.getElementById("sidebar").classList.remove("active");};
-window.changePassword = async ()=>{
-let oldPass=document.getElementById("oldPassword").value;
-let newPass=document.getElementById("newPassword").value;
-let confirmPass=document.getElementById("confirmNewPassword").value;
-if(!oldPass||!newPass||!confirmPass){msg("تمام فیلدها ضروری است","error");return;}
-if(newPass.length<6){msg("رمز باید حداقل ۶ کاراکتر باشد","error");return;}
-if(newPass!==confirmPass){msg("رمزهای جدید برابر نیستند","error");return;}
-try{
-const user=auth.currentUser;
-const credential=EmailAuthProvider.credential(user.email,oldPass);
-await reauthenticateWithCredential(user,credential);
-await updatePassword(user,newPass);
-window.currentUserPassword=newPass;
-document.getElementById("oldPassword").value="";
-document.getElementById("newPassword").value="";
-document.getElementById("confirmNewPassword").value="";
-msg("رمز عبور با موفقیت تغییر کرد","success");
-}catch(e){msg("پسورد قبلی اشتباه است","error");}
-};
-window.logout = ()=>{location.reload();};
-window.openSupportPage = ()=>{showPage("supportPage");document.getElementById("sidebar").classList.remove("active");};
-window.openWhatsApp = async (type)=>{
-let supportDoc=await getDoc(doc(db,"admin","support"));
-let num="";
-if(supportDoc.exists()){let d=supportDoc.data();num=type==="support1"?d.support1:type==="support2"?d.support2:d.support3;}
-if(!num)msg("شماره پشتیبانی تنظیم نشده","error");
-else window.open(`https://wa.me/${num}`,"_blank");
-};
-window.openSendMoneyPage = ()=>{showPage("sendMoneyPage");document.getElementById("sidebar").classList.remove("active");};
-
-window.sendMoney = async ()=>{
-if(!window.currentUserId){msg("لطفاً ابتدا وارد شوید","error");return;}
-let targetWallet=document.getElementById("sendToWalletId").value.trim();
-let amountRaw=document.getElementById("sendAmount").value.trim();
-if(!targetWallet||!amountRaw){msg("آیدی گیرنده و مقدار را وارد کنید","error");return;}
-let amount=Number(amountRaw);
-if(isNaN(amount)||amount<=0){msg("مقدار معتبر وارد کنید","error");return;}
-let userSnap=await getDoc(doc(db,"users",window.currentUserId));
-let currentBalance=userSnap.exists()?userSnap.data().balance:0;
-if(currentBalance<amount){msg("موجودی کافی نیست","error");return;}
-let q=query(collection(db,"users"),where("walletId","==",targetWallet));
-let snap=await getDocs(q);
-if(snap.empty){msg("کاربری با این آیدی پیدا نشد","error");return;}
-let receiverDoc=snap.docs[0];
-let receiverId=receiverDoc.id;
-let receiverData=receiverDoc.data();
-if(receiverId===window.currentUserId){msg("نمی‌توانید به خودتان انتقال دهید","error");return;}
-try{
-await updateDoc(doc(db,"users",window.currentUserId),{balance:currentBalance-amount});
-await updateDoc(doc(db,"users",receiverId),{balance:receiverData.balance+amount});
-await addDoc(collection(db,"transactions"),{fromUserId:window.currentUserId,toUserId:receiverId,fromWallet:window.currentUserWallet,toWallet:targetWallet,amount:amount,timestamp:new Date().toISOString(),service:"انتقال داخلی",status:"success"});
-let newBalance=currentBalance-amount;
-updateBalanceUI(newBalance);
-msg(`✅ انتقال موفق! ${amount} AFN به ${targetWallet} ارسال شد`,"success");
-document.getElementById("sendToWalletId").value="";
-document.getElementById("sendAmount").value="";
-showPage("dashboardPage");
-}catch(err){console.error(err);msg("خطا در انجام انتقال","error");}
-};
-
-// SOCIAL
-window.openSocialPage = ()=>{showPage("socialPage");document.getElementById("sidebar").classList.remove("active");};
-window.openBuySocial = (item,key)=>{currentSocialItem=item;currentSocialPriceKey=key;currentSocialPriceValue=socialPrices[key]||0;document.getElementById("buySocialTitle").innerHTML=`خرید ${item}`;document.getElementById("socialPriceNote").innerHTML=`قیمت هر واحد: ${currentSocialPriceValue} AFN`;document.getElementById("socialUserId").value="";document.getElementById("socialQuantity").value="";document.getElementById("socialTotalAmount").innerText="0";showPage("buySocialPage");};
-window.calculateSocialPrice = ()=>{let qty=document.getElementById("socialQuantity").value;document.getElementById("socialTotalAmount").innerText=(qty*currentSocialPriceValue)||0;};
-window.submitSocialOrder = async ()=>{
-let userId=document.getElementById("socialUserId").value.trim();
-let qty=document.getElementById("socialQuantity").value;
-if(!userId||!qty||qty<=0){msg("لطفاً آیدی و مقدار را وارد کنید","error");return;}
-let total=parseInt(qty)*currentSocialPriceValue;
-let userSnap=await getDoc(doc(db,"users",window.currentUserId));
-let currentBalance=userSnap.exists()?userSnap.data().balance:0;
-if(currentBalance<total){msg(`موجودی کافی نیست! نیاز به ${total} AFN دارید`,"error");return;}
-try{
-await updateDoc(doc(db,"users",window.currentUserId),{balance:currentBalance-total});
-await addDoc(collection(db,"transactions"),{fromUserId:window.currentUserId,amount:total,service:"شبکه اجتماعی",item:currentSocialItem,quantity:qty,userId:userId,timestamp:new Date().toISOString(),status:"pending"});
-let newBalance=currentBalance-total;
-updateBalanceUI(newBalance);
-msg(`⏳ سفارش ${qty} عدد ${currentSocialItem} ثبت شد. در انتظار تایید ادمین...`,"warning-msg");
-showPage("dashboardPage");
-}catch(e){msg("خطا در ثبت سفارش","error");}
-};
-
-// CREDIT
-window.openCreditPage = ()=>{showPage("creditPage");document.getElementById("sidebar").classList.remove("active");};
-window.calculateCreditPrice = ()=>{let amount=document.getElementById("creditAmount").value;document.getElementById("creditTotalAmount").innerText=(amount*creditUnitPrice)||0;};
-window.sendCredit = async ()=>{
-let number=document.getElementById("creditNumber").value.trim();
-let amount=document.getElementById("creditAmount").value;
-if(!number||!amount||amount<=0){msg("شماره و مبلغ را وارد کنید","error");return;}
-let total=parseInt(amount)*creditUnitPrice;
-let userSnap=await getDoc(doc(db,"users",window.currentUserId));
-let currentBalance=userSnap.exists()?userSnap.data().balance:0;
-if(currentBalance<total){msg("موجودی کافی نیست","error");return;}
-try{
-await updateDoc(doc(db,"users",window.currentUserId),{balance:currentBalance-total});
-await addDoc(collection(db,"transactions"),{fromUserId:window.currentUserId,amount:total,service:"کریدت افغانستان",number:number,creditAmount:amount,timestamp:new Date().toISOString(),status:"pending"});
-let newBalance=currentBalance-total;
-updateBalanceUI(newBalance);
-msg(`⏳ سفارش کریدت ${amount} واحد به شماره ${number} ثبت شد. در انتظار تایید ادمین...`,"warning-msg");
-document.getElementById("creditNumber").value="";
-document.getElementById("creditAmount").value="";
-document.getElementById("creditTotalAmount").innerText="0";
-showPage("dashboardPage");
-}catch(e){msg("خطا در ثبت سفارش","error");}
-};
-
-// INTERNET
-window.openInternetPage = ()=>{showPage("internetPage");document.getElementById("sidebar").classList.remove("active");document.getElementById("packagesContainer").style.display="none";};
-window.selectNetwork = (network)=>{currentNetwork=network;let container=document.getElementById("packagesContainer");let grid=document.getElementById("packageGrid");grid.innerHTML="";[1,2,3,5,10,20].forEach(gb=>{let price=internetPrices[`${network}_${gb}`]||0;let btn=document.createElement("button");btn.className="package-btn";btn.innerHTML=`<span>📶 ${gb} GB</span><span>${price} AFN</span>`;btn.onclick=()=>buyInternetPackage(gb,price);grid.appendChild(btn);});container.style.display="block";msg(`شبکه ${network} انتخاب شد`,"success");};
-window.buyInternetPackage = async (gb,price)=>{
-if(!currentNetwork){msg("لطفاً شبکه را انتخاب کنید","error");return;}
-if(price<=0){msg("قیمت تنظیم نشده","error");return;}
-let userSnap=await getDoc(doc(db,"users",window.currentUserId));
-let currentBalance=userSnap.exists()?userSnap.data().balance:0;
-if(currentBalance<price){msg(`موجودی کافی نیست! نیاز به ${price} AFN`,"error");return;}
-showPhoneModal(`خرید بسته ${gb}GB ${currentNetwork}`,async(number)=>{
-try{
-await updateDoc(doc(db,"users",window.currentUserId),{balance:currentBalance-price});
-await addDoc(collection(db,"transactions"),{fromUserId:window.currentUserId,amount:price,service:"بسته اینترنتی",network:currentNetwork,package:`${gb}GB`,number:number,timestamp:new Date().toISOString(),status:"pending"});
-let newBalance=currentBalance-price;
-updateBalanceUI(newBalance);
-msg(`⏳ سفارش بسته ${gb}GB ثبت شد. در انتظار تایید ادمین...`,"warning-msg");
-showPage("dashboardPage");
-}catch(e){msg("خطا در ثبت سفارش","error");}
-});
-};
-
-// CRYPTO
-window.openCryptoPage = ()=>{showPage("cryptoPage");document.getElementById("sidebar").classList.remove("active");};
-window.openCryptoNetwork = (network,key)=>{currentCryptoNetwork=network;currentCryptoPriceKey=key;currentCryptoPriceValue=socialPrices[key]||0;document.getElementById("cryptoTitle").innerHTML=`خرید ${network}`;document.getElementById("cryptoPriceNote").innerHTML=`قیمت هر USDT: ${currentCryptoPriceValue} AFN`;document.getElementById("cryptoAddress").value="";document.getElementById("cryptoAmount").value="";document.getElementById("cryptoTotalAmount").innerText="0";showPage("cryptoBuyPage");};
-window.calculateCryptoPrice = ()=>{let usdt=document.getElementById("cryptoAmount").value;document.getElementById("cryptoTotalAmount").innerText=(usdt*currentCryptoPriceValue)||0;};
-window.submitCryptoOrder = async ()=>{
-let address=document.getElementById("cryptoAddress").value.trim();
-let usdt=document.getElementById("cryptoAmount").value;
-if(!address||!usdt||usdt<=0){msg("لطفاً آدرس و مقدار USDT را وارد کنید","error");return;}
-let total=parseInt(usdt)*currentCryptoPriceValue;
-let userSnap=await getDoc(doc(db,"users",window.currentUserId));
-let currentBalance=userSnap.exists()?userSnap.data().balance:0;
-if(currentBalance<total){msg(`موجودی کافی نیست! نیاز به ${total} AFN`,"error");return;}
-try{
-await updateDoc(doc(db,"users",window.currentUserId),{balance:currentBalance-total});
-await addDoc(collection(db,"transactions"),{fromUserId:window.currentUserId,amount:total,service:"ارز دیجیتال",network:currentCryptoNetwork,address:address,usdtAmount:usdt,timestamp:new Date().toISOString(),status:"pending"});
-let newBalance=currentBalance-total;
-updateBalanceUI(newBalance);
-msg(`⏳ سفارش ${usdt} USDT ثبت شد. در انتظار تایید ادمین...`,"warning-msg");
-showPage("dashboardPage");
-}catch(e){msg("خطا در ثبت سفارش","error");}
-};
-
-// TURKEY
-window.openTurkeyPage = ()=>{showPage("turkeyPage");document.getElementById("sidebar").classList.remove("active");};
-window.calculateTurkeyPrice = ()=>{let lira=document.getElementById("turkeyAmount").value;document.getElementById("turkeyTotalAmount").innerText=(lira*turkeyRate)||0;};
-window.submitTurkeyOrder = async ()=>{
-let iban=document.getElementById("turkeyIban").value.trim();
-let lira=document.getElementById("turkeyAmount").value;
-if(!iban||!lira||lira<=0){msg("لطفاً شماره کارت و مبلغ را وارد کنید","error");return;}
-let total=parseInt(lira)*turkeyRate;
-let userSnap=await getDoc(doc(db,"users",window.currentUserId));
-let currentBalance=userSnap.exists()?userSnap.data().balance:0;
-if(currentBalance<total){msg(`موجودی کافی نیست! نیاز به ${total} AFN`,"error");return;}
-try{
-await updateDoc(doc(db,"users",window.currentUserId),{balance:currentBalance-total});
-await addDoc(collection(db,"transactions"),{fromUserId:window.currentUserId,amount:total,service:"حواله به ترکیه",iban:iban,liraAmount:lira,timestamp:new Date().toISOString(),status:"pending"});
-let newBalance=currentBalance-total;
-updateBalanceUI(newBalance);
-msg(`⏳ سفارش حواله ${lira} لیر به ترکیه ثبت شد. در انتظار تایید ادمین...`,"warning-msg");
-showPage("dashboardPage");
-}catch(e){msg("خطا در ثبت سفارش","error");}
-};
-
-// AFGHANISTAN
-window.openAfghanistanPage = ()=>{
-showPage("afghanistanPage");
-document.getElementById("sidebar").classList.remove("active");
-let grid=document.getElementById("provincesGrid");
-grid.innerHTML="";
-provinces.forEach(p=>{let btn=document.createElement("button");btn.className="province-btn";btn.innerHTML=`🇦🇫 ${p}`;btn.onclick=()=>openAfghanTransfer(p);grid.appendChild(btn);});
-};
-function openAfghanTransfer(province){
-currentProvince=province;
-document.getElementById("afghanProvinceTitle").innerHTML=`حواله به ${province}`;
-let ex=exchangersData[`${province}_name`]?{name:exchangersData[`${province}_name`],phone:exchangersData[`${province}_phone`]||""}:{name:"در حال تعیین",phone:""};
-document.getElementById("exchangerName").innerHTML=`🏦 صرافی: ${ex.name}`;
-document.getElementById("exchangerPhone").innerHTML=`📞 تماس: ${ex.phone}`;
-document.getElementById("exchangerInfoDiv").style.display="block";
-document.getElementById("senderName").value="";
-document.getElementById("senderPhone").value="";
-document.getElementById("receiverName").value="";
-document.getElementById("receiverFatherName").value="";
-document.getElementById("afghanMoneyAmount").value="";
-document.getElementById("afghanTotalAmount").innerText="0";
-showPage("afghanTransferPage");
+async function loadExchangers() {
+let container = document.getElementById("provincesList");
+container.innerHTML = "";
+let docSnap = await getDoc(doc(db, "admin", "exchangers"));
+let data = docSnap.exists() ? docSnap.data() : {};
+for (let p of provinces) {
+let div = document.createElement("div"); div.className = "province-card";
+div.innerHTML = `<h4>🇦🇫 ${p}</h4>
+<input type="text" id="ex_name_${p.replace(/\s/g, '')}" placeholder="نام صرافی/صراف" value="${data[`${p}_name`] || ''}">
+<input type="text" id="ex_phone_${p.replace(/\s/g, '')}" placeholder="شماره تماس" value="${data[`${p}_phone`] || ''}">`;
+container.appendChild(div);
 }
-window.calculateAfghanPrice = ()=>{
-let amount=document.getElementById("afghanMoneyAmount").value;
-let total=parseFloat(amount)+(parseFloat(amount)*afghanFeeRate)+afghanBasePrice;
-document.getElementById("afghanTotalAmount").innerText=(!isNaN(total)?total.toFixed(0):0)||0;
-};
-window.submitAfghanOrder = async ()=>{
-let senderName=document.getElementById("senderName").value.trim();
-let senderPhone=document.getElementById("senderPhone").value.trim();
-let receiverName=document.getElementById("receiverName").value.trim();
-let receiverFatherName=document.getElementById("receiverFatherName").value.trim();
-let amount=document.getElementById("afghanMoneyAmount").value;
-if(!senderName||!senderPhone||!receiverName||!receiverFatherName||!amount||amount<=0){msg("لطفاً تمام فیلدها (نام فرستنده، شماره تماس، نام گیرنده، نام پدر گیرنده، مبلغ) را کامل کنید","error");return;}
-let exchanger=exchangersData[`${currentProvince}_name`]||"صرافی همکار";
-let total=parseFloat(amount)+(parseFloat(amount)*afghanFeeRate)+afghanBasePrice;
-let userSnap=await getDoc(doc(db,"users",window.currentUserId));
-let currentBalance=userSnap.exists()?userSnap.data().balance:0;
-if(currentBalance<total){msg(`موجودی کافی نیست! نیاز به ${total.toFixed(0)} AFN`,"error");return;}
-try{
-await updateDoc(doc(db,"users",window.currentUserId),{balance:currentBalance-total});
-await addDoc(collection(db,"transactions"),{fromUserId:window.currentUserId,amount:total,service:"حواله افغانستان",province:currentProvince,senderName:senderName,senderPhone:senderPhone,receiverName:receiverName,receiverFatherName:receiverFatherName,transferAmount:amount,exchangerName:exchanger,timestamp:new Date().toISOString(),status:"pending"});
-let newBalance=currentBalance-total;
-updateBalanceUI(newBalance);
-msg(`⏳ سفارش حواله ${amount} AFN به ولایت ${currentProvince} ثبت شد. در انتظار تایید ادمین...`,"warning-msg");
-showPage("dashboardPage");
-}catch(e){msg("خطا در ثبت سفارش","error");}
-};
-
-// PEY
-window.openPeyPage = ()=>{showPage("peyPage");document.getElementById("sidebar").classList.remove("active");};
-window.calculatePeyPrice = ()=>{let amount=document.getElementById("peyAmount").value;document.getElementById("peyTotalAmount").innerText=(amount/100)*peyUnitPrice||0;};
-window.sendToPey = async ()=>{
-let number=document.getElementById("peyNumber").value.trim();
-let amount=document.getElementById("peyAmount").value;
-if(!number||!amount||amount<=0){msg("شماره و مبلغ را وارد کنید","error");return;}
-let total=(amount/100)*peyUnitPrice;
-let userSnap=await getDoc(doc(db,"users",window.currentUserId));
-let currentBalance=userSnap.exists()?userSnap.data().balance:0;
-if(currentBalance<total){msg("موجودی کافی نیست","error");return;}
-try{
-await updateDoc(doc(db,"users",window.currentUserId),{balance:currentBalance-total});
-await addDoc(collection(db,"transactions"),{fromUserId:window.currentUserId,amount:total,service:"حساب پی",number:number,transferAmount:amount,timestamp:new Date().toISOString(),status:"pending"});
-let newBalance=currentBalance-total;
-updateBalanceUI(newBalance);
-msg(`⏳ سفارش ارسال ${amount} AFN به حساب پی ${number} ثبت شد. در انتظار تایید ادمین...`,"warning-msg");
-document.getElementById("peyNumber").value="";
-document.getElementById("peyAmount").value="";
-document.getElementById("peyTotalAmount").innerText="0";
-showPage("dashboardPage");
-}catch(e){msg("خطا در ثبت سفارش","error");}
-};
-
-// MOMO
-window.openMomoPage = ()=>{showPage("momoPage");document.getElementById("sidebar").classList.remove("active");};
-window.calculateMomoPrice = ()=>{let amount=document.getElementById("momoAmount").value;document.getElementById("momoTotalAmount").innerText=(amount/100)*momoUnitPrice||0;};
-window.sendToMomo = async ()=>{
-let number=document.getElementById("momoNumber").value.trim();
-let amount=document.getElementById("momoAmount").value;
-if(!number||!amount||amount<=0){msg("شماره و مبلغ را وارد کنید","error");return;}
-let total=(amount/100)*momoUnitPrice;
-let userSnap=await getDoc(doc(db,"users",window.currentUserId));
-let currentBalance=userSnap.exists()?userSnap.data().balance:0;
-if(currentBalance<total){msg("موجودی کافی نیست","error");return;}
-try{
-await updateDoc(doc(db,"users",window.currentUserId),{balance:currentBalance-total});
-await addDoc(collection(db,"transactions"),{fromUserId:window.currentUserId,amount:total,service:"مومو",number:number,transferAmount:amount,timestamp:new Date().toISOString(),status:"pending"});
-let newBalance=currentBalance-total;
-updateBalanceUI(newBalance);
-msg(`⏳ سفارش ارسال ${amount} AFN به مومو ${number} ثبت شد. در انتظار تایید ادمین...`,"warning-msg");
-document.getElementById("momoNumber").value="";
-document.getElementById("momoAmount").value="";
-document.getElementById("momoTotalAmount").innerText="0";
-showPage("dashboardPage");
-}catch(e){msg("خطا در ثبت سفارش","error");}
-};
-
-// IRAN - محاسبه خودکار بر اساس قیمت هر تومان
-window.openIranPage = ()=>{showPage("iranPage");document.getElementById("sidebar").classList.remove("active");};
-window.calculateIranPrice = ()=>{
-let tomanAmount = document.getElementById("iranAmount").value;
-let totalAFN = (parseFloat(tomanAmount) || 0) * iranUnitPrice;
-document.getElementById("iranTotalAmount").innerText = totalAFN.toFixed(0) || "0";
-};
-window.sendToIran = async ()=>{
-let card=document.getElementById("iranCard").value.trim();
-let tomanAmount=document.getElementById("iranAmount").value;
-if(!card){msg("شماره کارت را وارد کنید","error");return;}
-if(!tomanAmount||tomanAmount<=0){msg("مبلغ به تومان را وارد کنید","error");return;}
-let total = parseFloat(tomanAmount) * iranUnitPrice;
-let userSnap=await getDoc(doc(db,"users",window.currentUserId));
-let currentBalance=userSnap.exists()?userSnap.data().balance:0;
-if(currentBalance<total){msg(`موجودی کافی نیست! نیاز به ${total.toFixed(0)} AFN`,"error");return;}
-try{
-await updateDoc(doc(db,"users",window.currentUserId),{balance:currentBalance-total});
-await addDoc(collection(db,"transactions"),{fromUserId:window.currentUserId,amount:total,service:"حواله بانکی ایران",cardNumber:card,tomanAmount:tomanAmount,iranUnitPrice:iranUnitPrice,timestamp:new Date().toISOString(),status:"pending"});
-let newBalance=currentBalance-total;
-updateBalanceUI(newBalance);
-msg(`⏳ سفارش حواله ${tomanAmount} تومان به کارت ${card} ثبت شد. در انتظار تایید ادمین...`,"warning-msg");
-document.getElementById("iranCard").value="";
-document.getElementById("iranAmount").value="";
-document.getElementById("iranTotalAmount").innerText="0";
-showPage("dashboardPage");
-}catch(e){msg("خطا در ثبت سفارش","error");}
-};
-
-window.openExchangePage = ()=>{showPage("exchangePage");document.getElementById("sidebar").classList.remove("active");};
-
-loadPrices();
-
-// Real-time transaction listener for tracking code updates
-if(window.currentUserId){
-onSnapshot(query(collection(db,"transactions"),where("fromUserId","==",window.currentUserId)), (snapshot)=>{
-if(document.getElementById("transactionsPage").classList.contains("active")){
-window.openTransactionsPage();
 }
-});
+
+window.saveAllExchangers = async () => {
+let exchangers = {};
+for (let p of provinces) {
+exchangers[`${p}_name`] = document.getElementById(`ex_name_${p.replace(/\s/g, '')}`)?.value || "";
+exchangers[`${p}_phone`] = document.getElementById(`ex_phone_${p.replace(/\s/g, '')}`)?.value || "";
 }
+await setDoc(doc(db, "admin", "exchangers"), exchangers);
+msg("✅ اطلاعات صرافی‌ها ذخیره شد", "success");
+};
+
+window.searchUser = async () => {
+let walletId = document.getElementById("searchUserId").value.trim();
+if (!walletId) { msg("آیدی را وارد کنید", "error"); return; }
+let q = query(collection(db, "users"), where("walletId", "==", walletId));
+let snap = await getDocs(q);
+let resultDiv = document.getElementById("userInfoResult");
+if (snap.empty) { resultDiv.innerHTML = "<div class='user-info' style='color:red;'>❌ کاربر یافت نشد</div>"; return; }
+let user = snap.docs[0]; let data = user.data();
+resultDiv.innerHTML = `<div class="user-info"><h3>👤 ${data.fullName}</h3>
+<p><strong>🆔 آیدی:</strong> ${data.walletId}</p><p><strong>📧 ایمیل:</strong> ${data.email}</p>
+<p><strong>💰 موجودی:</strong> ${data.balance?.toLocaleString()} AFN</p>
+<p><strong>🌍 کشور:</strong> ${data.country}</p>
+<div class="balance-control"><input type="number" id="addAmount" placeholder="مبلغ افزایش"><button class="btn-success" onclick="addBalance('${user.id}')">➕ افزایش</button></div>
+<div class="balance-control"><input type="number" id="removeAmount" placeholder="مبلغ کاهش"><button class="btn-danger" onclick="removeBalance('${user.id}')">➖ کاهش</button></div>
+</div>`;
+};
+
+window.addBalance = async (userId) => {
+let amount = document.getElementById("addAmount")?.value;
+if (!amount || amount <= 0) { msg("مبلغ معتبر وارد کنید", "error"); return; }
+let userRef = doc(db, "users", userId);
+let snap = await getDoc(userRef);
+await updateDoc(userRef, { balance: (snap.data().balance || 0) + Number(amount) });
+msg(`💰 ${amount} AFN اضافه شد`, "success");
+document.getElementById("addAmount").value = "";
+searchUser(); loadStats();
+};
+
+window.removeBalance = async (userId) => {
+let amount = document.getElementById("removeAmount")?.value;
+if (!amount || amount <= 0) { msg("مبلغ معتبر وارد کنید", "error"); return; }
+let userRef = doc(db, "users", userId);
+let snap = await getDoc(userRef);
+let current = snap.data().balance || 0;
+if (current < amount) { msg("موجودی کافی نیست", "error"); return; }
+await updateDoc(userRef, { balance: current - Number(amount) });
+msg(`💰 ${amount} AFN کسر شد`, "success");
+document.getElementById("removeAmount").value = "";
+searchUser(); loadStats();
+};
+
+async function loadSupportNumbers() {
+try {
+let docSnap = await getDoc(doc(db, "admin", "support"));
+if (docSnap.exists()) { let d = docSnap.data();
+document.getElementById("support1") && (document.getElementById("support1").value = d.support1 || "");
+document.getElementById("support2") && (document.getElementById("support2").value = d.support2 || "");
+document.getElementById("support3") && (document.getElementById("support3").value = d.support3 || "");
+}
+} catch(e) {}
+}
+
+window.saveSupportNumbers = async () => {
+let numbers = { support1: document.getElementById("support1")?.value, support2: document.getElementById("support2")?.value, support3: document.getElementById("support3")?.value };
+await setDoc(doc(db, "admin", "support"), numbers);
+msg("شماره‌های پشتیبانی ذخیره شد ✅", "success");
+};
+
+window.updateAdminInfo = () => {
+let newEmail = document.getElementById("newAdminEmail").value.trim();
+let newPass = document.getElementById("newAdminPassword").value;
+let confirmPass = document.getElementById("confirmAdminPassword").value;
+if (newEmail) { localStorage.setItem("adminEmail", newEmail); msg("ایمیل تغییر یافت (با ایمیل جدید وارد شوید)", "success"); }
+if (newPass && newPass === confirmPass && newPass.length >= 4) { localStorage.setItem("adminPassword", newPass); msg("رمز عبور تغییر یافت ✅", "success"); }
+else if (newPass) { msg("رمزها مطابقت ندارند یا کمتر از 4 کاراکتر است", "error"); }
+document.getElementById("newAdminEmail").value = "";
+document.getElementById("newAdminPassword").value = "";
+document.getElementById("confirmAdminPassword").value = "";
+};
 </script>
 </body>
 </html>
